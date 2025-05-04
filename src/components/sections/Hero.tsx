@@ -1,0 +1,281 @@
+import React, { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
+import { TypeAnimation } from "react-type-animation";
+import { useFrame } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls, useGLTF } from "@react-three/drei";
+import * as THREE from "three";
+import { Github, Linkedin, Twitter, Mail } from "lucide-react";
+import { useTheme } from "../../context/ThemeContext";
+import dev from "../../assets/programmer.svg";
+
+function GeometricModel() {
+  const mesh = useRef<THREE.Mesh>(null);
+  const { theme } = useTheme();
+
+  useFrame(() => {
+    if (mesh.current) {
+      mesh.current.rotation.x += 0.01;
+      mesh.current.rotation.y += 0.01;
+    }
+  });
+
+  return (
+    <mesh ref={mesh} scale={[2, 2, 2]}>
+      <dodecahedronGeometry args={[1, 0]} />
+      <meshStandardMaterial
+        color={theme === "dark" ? "#ff5733" : "#ff5733"}
+        wireframe
+      />
+    </mesh>
+  );
+}
+
+
+
+function ParticlesBackground() {
+  const pointsRef = useRef<THREE.Points>(null);
+  const { theme } = useTheme();
+
+  useEffect(() => {
+    if (!pointsRef.current) return;
+  }, []);
+
+  // Create particles
+  const particlesGeometry = new THREE.SphereGeometry(9, 64, 64); // Changed here
+
+  const particleCount = 1500;
+  const positions = new Float32Array(particleCount * 3);
+
+  for (let i = 0; i < particleCount * 3; i += 3) {
+    positions[i] = (Math.random() - 0.5) * 10;
+    positions[i + 1] = (Math.random() - 0.5) * 10;
+    positions[i + 2] = (Math.random() - 0.5) * 10;
+  }
+
+  particlesGeometry.setAttribute(
+    "position",
+    new THREE.BufferAttribute(positions, 3),
+  );
+
+  useFrame(() => {
+    if (pointsRef.current) {
+      pointsRef.current.rotation.x += 0.005;
+      pointsRef.current.rotation.y += 0.002;
+    }
+  });
+
+  return (
+    <points ref={pointsRef}>
+      <bufferGeometry attach="geometry" {...particlesGeometry} />
+      <pointsMaterial
+        attach="material"
+        size={0.08}
+        sizeAttenuation
+        color={theme === "dark" ? "#e83a17" : "#ff5733"}
+        transparent
+        opacity={theme === "dark" ? 1 : 0.3}
+      />
+    </points>
+  );
+}
+
+
+const Hero: React.FC = () => {
+  const socialLinks = [
+    { name: "GitHub", icon: <Github />, url: "https://github.com/" },
+    { name: "LinkedIn", icon: <Linkedin />, url: "https://linkedin.com/" },
+    { name: "Email", icon: <Mail />, url: "mailto:nikhil-madaravena@gmail.com" },
+  ];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        delayChildren: 0.3,
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.5 },
+    },
+  };
+
+  const canvasContainerVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 1 },
+    },
+  };
+
+  return (
+    <section
+      id="home"
+      className="min-h-screen flex items-center relative overflow-hidden pt-20 bg-white dark:bg-dark-950"
+    >
+      <div className="absolute rounded-sm inset-0 z-0 opacity-50 dark:opacity-10">
+        <Canvas camera={{ position: [0, 0, 6] }}>
+          <ambientLight intensity={0.5} />
+          <directionalLight position={[10, 10, 5]} intensity={1} />
+          <ParticlesBackground />
+          <OrbitControls
+            enableZoom={true}
+            enablePan={true}
+            enableRotate={true}
+            autoRotate={true}
+            autoRotateSpeed={1}
+            maxPolarAngle={Math.PI / 2}
+            minPolarAngle={Math.PI / 2}
+            maxDistance={10}
+            minDistance={2}
+            target={[0, 0, 0]}
+            rotateSpeed={0.5}
+            minAzimuthAngle={-Math.PI / 2}
+            maxAzimuthAngle={Math.PI / 2}
+          />
+        </Canvas>
+      </div>
+
+      <div className="container mx-10 px-10 z-10">
+        <div className="grid lg:grid gap-12 items-center">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="order-2 lg:order-1"
+          >
+            <motion.h2
+              variants={itemVariants}
+              className="text-xl text-center md:text-2xl font-medium  text-dark-900 dark:text-white mb-2"
+            >
+              Hello, I'm
+            </motion.h2>
+
+            <motion.h1
+              variants={itemVariants}
+              className="text-4xl text-center md:text-5xl lg:text-6xl font-bold text-primary-500 mb-4"
+            >
+              Nikhil Madaravena
+            </motion.h1>
+
+            <motion.div
+              variants={itemVariants}
+              className="text-xl text-center md:text-2xl text-dark-600 dark:text-dark-300 mb-6 h-8"
+            >
+              <TypeAnimation
+                sequence={[
+                  "Frontend Developer",
+                  2000,
+                  "UI/UX Enthusiast",
+                  2000,
+                  "React Specialist",
+                  2000,
+                  "Web Animator",
+                  2000,
+                ]}
+                wrapper="span"
+                speed={50}
+                repeat={Infinity}
+              />
+            </motion.div>
+
+            <motion.p
+              variants={itemVariants}
+              className="text-dark-600 text-center dark:text-dark-400 mb-8 "
+            >
+              I build beautiful, interactive, and high-performance web
+              applications with modern technologies and best practices.
+            </motion.p>
+
+            <div className="flex justify-center">
+            <motion.div variants={itemVariants} className="flex items-center space-x-4 mb-8">
+              {socialLinks.map((link) => (
+                <motion.a
+                  key={link.name}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 bg-dark-100 dark:bg-dark-800 text-dark-500 dark:text-dark-300 rounded-full hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  aria-label={link.name}
+                >
+                  {link.icon}
+                </motion.a>
+              ))}
+            </motion.div>
+            </div>
+
+            <div className="flex justify-center">
+            <motion.div
+              variants={itemVariants}
+              className="flex flex-wrap gap-4"
+            >
+              <motion.a
+                href="#contact"
+                className="px-6 py-3 bg-primary-600 text-white rounded-lg shadow-lg hover:bg-primary-700 transition-colors"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Get in Touch
+              </motion.a>
+
+              <motion.a
+                href="#projects"
+                className="px-6 py-3 bg-dark-100 dark:bg-dark-800 text-dark-900 dark:text-white rounded-lg shadow-lg hover:bg-dark-200 dark:hover:bg-dark-700 transition-colors"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                View My Work
+              </motion.a>
+            </motion.div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 2, duration: 1 }}
+        className="absolute bottom-8 left-0 right-0 flex justify-center"
+      >
+        <a
+          href="#about"
+          className="flex flex-col items-center text-dark-500 dark:text-dark-400 hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
+        >
+          <span className="text-sm mb-2">Scroll Down</span>
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ repeat: Infinity, duration: 2 }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </motion.div>
+        </a>
+      </motion.div>
+    </section>
+  );
+};
+
+export default Hero;
