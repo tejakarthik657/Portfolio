@@ -1,11 +1,11 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
-import { useFrame } from "@react-three/fiber";
-import { Canvas } from "@react-three/fiber";
+import { useFrame, Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 import { Github, Linkedin, Mail } from "lucide-react";
+import gsap from "gsap";
 import { useTheme } from "../../context/ThemeContext";
 
 function GeometricModel() {
@@ -28,39 +28,114 @@ function GeometricModel() {
 }
 
 function ParticlesBackground() {
-  const pointsRef = useRef<THREE.Points>(null);
+  const groupRef = useRef<THREE.Group>(null);
   const { theme } = useTheme();
+  const { mouse, camera, raycaster } = useThree();
 
-  const particlesGeometry = new THREE.BufferGeometry();
-  const particleCount = 1500;
-  const positions = new Float32Array(particleCount * 3);
+  const particles = useMemo(() => {
+    const particleCount = 1200; // Increased the particle count
+    const data = [];
+    for (let i = 0; i < particleCount; i++) {
+      data.push({
+        position: [
+          (Math.random() - 0.5) * 20,  // Adjusted the range for more spread
+          (Math.random() - 0.5) * 20,  // Adjusted the range for more spread
+          (Math.random() - 0.5) * 20,  // Adjusted the range for more spread
+        ],
+        scale: Math.random() * 0.5 + 0.5,
+      });
+    }
+    return data;
+  }, []);
 
-  for (let i = 0; i < particleCount * 3; i += 3) {
-    positions[i] = (Math.random() - 0.5) * 10;
-    positions[i + 1] = (Math.random() - 0.5) * 10;
-    positions[i + 2] = (Math.random() - 0.5) * 10;
-  }
+  useEffect(() => {
+    if (!groupRef.current) return;
 
-  particlesGeometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+    groupRef.current.children.forEach((mesh, index) => {
+      const delay = Math.random() * 2;
+      gsap.to(mesh.position, {
+        y: "+=0.3",
+        duration: 2,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        delay,
+      });
+      gsap.to(mesh.scale, {
+        x: "+=0.3",
+        y: "+=0.3",
+        z: "+=0.3",
+        duration: 1.5,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        delay,
+      });
+      gsap.from(mesh.material, {
+        emissiveIntensity: 0,
+        duration: 1,
+        ease: "power1.inOut",
+        delay,
+      });
+    });
+  }, []);
 
   useFrame(() => {
-    if (pointsRef.current) {
-      pointsRef.current.rotation.x += 0.005;
-      pointsRef.current.rotation.y += 0.002;
+    if (groupRef.current) {
+      groupRef.current.rotation.y += 0.001;
+      groupRef.current.rotation.x += 0.0005;
+
+      raycaster.setFromCamera(mouse, camera);
+      const mousePos = new THREE.Vector3();
+      raycaster.ray.at(0, mousePos);
+
+      groupRef.current.children.forEach((mesh) => {
+        const dx = mesh.position.x - mousePos.x;
+        const dy = mesh.position.y - mousePos.y;
+        const dz = mesh.position.z - mousePos.z;
+        const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
+        if (dist < 1.5) {
+          gsap.to(mesh.scale, {
+            x: 1.5,
+            y: 1.5,
+            z: 1.5,
+            duration: 0.3,
+          });
+          gsap.to(mesh.material, {
+            emissiveIntensity: 2,
+            duration: 0.3,
+          });
+        } else {
+          gsap.to(mesh.scale, {
+            x: 1,
+            y: 1,
+            z: 1,
+            duration: 0.5,
+          });
+          gsap.to(mesh.material, {
+            emissiveIntensity: 0.8,
+            duration: 0.5,
+          });
+        }
+      });
     }
   });
 
   return (
-    <points ref={pointsRef}>
-      <primitive object={particlesGeometry} attach="geometry" />
-      <pointsMaterial
-        size={0.08}
-        sizeAttenuation
-        color={theme === "dark" ? "#e83a17" : "#ff5733"}
-        transparent
-        opacity={theme === "dark" ? 1 : 0.3}
-      />
-    </points>
+    <group ref={groupRef}>
+      {particles.map((p, index) => (
+        <mesh position={p.position} scale={p.scale} key={index}>
+          <sphereGeometry args={[0.05, 16, 16]} />
+          <meshStandardMaterial
+            color={theme === "dark" ? "#e83a17" : "#ff5733"}
+            emissive={theme === "dark" ? new THREE.Color("rgba(255, 87, 51, 0.8)") : new THREE.Color("#ff5733")}
+            emissiveIntensity={0.8}
+            transparent
+            opacity={theme === "dark" ? 1 : 0.4}
+          />
+        </mesh>
+      ))}
+    </group>
   );
 }
 
@@ -95,7 +170,6 @@ const Hero: React.FC = () => {
       id="home"
       className="min-h-screen flex items-center relative overflow-hidden pt-20 bg-white dark:bg-dark-950"
     >
-      {/* Canvas Background */}
       <div className="absolute inset-0 z-0 h-[100vh] sm:h-full w-full opacity-50 dark:opacity-10">
         <Canvas camera={{ position: [0, 0, 6] }}>
           <ambientLight intensity={0.5} />
@@ -119,7 +193,6 @@ const Hero: React.FC = () => {
         </Canvas>
       </div>
 
-      {/* Hero Text */}
       <div className="container mx-4 px-4 sm:mx-10 sm:px-10 z-10">
         <div className="grid gap-12 items-center">
           <motion.div
@@ -134,14 +207,12 @@ const Hero: React.FC = () => {
             >
               Hello, I'm
             </motion.h2>
-
             <motion.h1
               variants={itemVariants}
               className="text-4xl text-center md:text-5xl lg:text-6xl font-bold text-primary-500 mb-4"
             >
               Nikhil Madaravena
             </motion.h1>
-
             <motion.div
               variants={itemVariants}
               className="text-xl text-center md:text-2xl text-dark-600 dark:text-dark-300 mb-6 h-8"
@@ -158,15 +229,6 @@ const Hero: React.FC = () => {
                 repeat={Infinity}
               />
             </motion.div>
-
-            <motion.p
-              variants={itemVariants}
-              className="text-dark-600 text-center dark:text-dark-400 mb-8"
-            >
-              I build beautiful, interactive, and high-performance web applications
-              with modern technologies and best practices.
-            </motion.p>
-
             <div className="flex justify-center">
               <motion.div variants={itemVariants} className="flex items-center space-x-4 mb-8">
                 {socialLinks.map((link) => (
@@ -185,7 +247,6 @@ const Hero: React.FC = () => {
                 ))}
               </motion.div>
             </div>
-
             <div className="flex justify-center">
               <motion.div variants={itemVariants} className="flex flex-wrap gap-4">
                 <motion.a
@@ -210,7 +271,6 @@ const Hero: React.FC = () => {
         </div>
       </div>
 
-      {/* Scroll Down */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

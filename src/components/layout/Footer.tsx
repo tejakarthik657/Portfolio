@@ -13,7 +13,7 @@ const Footer: React.FC = () => {
 
   const footerVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
   };
 
   const iconVariants = {
@@ -24,9 +24,9 @@ const Footer: React.FC = () => {
       transition: { delay: i * 0.1, duration: 0.3 },
     }),
     hover: { 
-      scale: 1.2, 
+      scale: 1.25, 
       color: '#ff5733',
-      transition: { duration: 0.2 } 
+      transition: { duration: 0.3, ease: 'easeOut' } 
     },
   };
 
@@ -36,24 +36,28 @@ const Footer: React.FC = () => {
       whileInView="visible"
       viewport={{ once: true }}
       variants={footerVariants}
-      className="bg-dark-100 dark:bg-dark-900 py-12 px-4"
+      className="bg-dark-900 dark:bg-dark-900 text-white py-12 px-6 sm:px-8 md:px-16"
     >
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="max-w-screen-xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-64">
+          {/* Left section: Name */}
           <div className="md:col-span-1">
-            <h2 className="text-3xl font-display font-bold text-primary-500 mt-16 mb-4">
-              <span className="text-dark-900 dark:text-white">Nikhil </span>
-              Madaravena
+            <h2 className="text-3xl font-display font-bold text-primary-500 mb-4">
+              <span className="text-white">Nikhil </span> Madaravena
             </h2>
+            <p className="text-lg text-dark-300">
+              Frontend Developer | UI/UX Designer
+            </p>
           </div>
 
+          {/* Middle section: Quick Links */}
           <div className="md:col-span-1">
-            <h3 className="text-lg font-bold text-dark-900 dark:text-white mb-4">Quick Links</h3>
-            <ul className="space-y-2">
+            <h3 className="text-lg font-bold text-white mb-4">Quick Links</h3>
+            <ul className="space-y-3">
               <li>
                 <a 
                   href="#home" 
-                  className="text-dark-600 dark:text-dark-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
+                  className="text-dark-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors duration-300"
                 >
                   Home
                 </a>
@@ -61,7 +65,7 @@ const Footer: React.FC = () => {
               <li>
                 <a 
                   href="#about" 
-                  className="text-dark-600 dark:text-dark-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
+                  className="text-dark-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors duration-300"
                 >
                   About
                 </a>
@@ -69,7 +73,7 @@ const Footer: React.FC = () => {
               <li>
                 <a 
                   href="#projects" 
-                  className="text-dark-600 dark:text-dark-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
+                  className="text-dark-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors duration-300"
                 >
                   Projects
                 </a>
@@ -77,7 +81,7 @@ const Footer: React.FC = () => {
               <li>
                 <a 
                   href="#contact" 
-                  className="text-dark-600 dark:text-dark-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
+                  className="text-dark-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors duration-300"
                 >
                   Contact
                 </a>
@@ -85,16 +89,17 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
+          {/* Right section: Social Icons */}
           <div className="md:col-span-1">
-            <h3 className="text-lg font-bold text-dark-900 dark:text-white mb-4">Connect</h3>
-            <div className="flex space-x-4">
+            <h3 className="text-lg font-bold text-white mb-4">Connect</h3>
+            <div className="flex space-x-6">
               {socialLinks.map((link, i) => (
                 <motion.a
                   key={link.name}
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 bg-white dark:bg-dark-800 text-dark-500 dark:text-dark-300 rounded-full hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
+                  className="p-3 bg-white dark:bg-dark-800 text-dark-500 dark:text-dark-300 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
                   aria-label={link.name}
                   custom={i}
                   variants={iconVariants}
@@ -107,8 +112,9 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-dark-200 dark:border-dark-700">
-          <p className="text-center text-dark-500 dark:text-dark-400">
+        {/* Bottom section: Copyright */}
+        <div className="mt-10 pt-8 border-t border-dark-200 dark:border-dark-700">
+          <p className="text-center text-dark-400 dark:text-dark-300 text-sm">
             © {currentYear} Nikhil Madaravena. All rights reserved.
           </p>
         </div>
