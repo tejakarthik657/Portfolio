@@ -3,11 +3,10 @@ import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import { useFrame } from "@react-three/fiber";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, useGLTF } from "@react-three/drei";
+import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
-import { Github, Linkedin, Twitter, Mail } from "lucide-react";
+import { Github, Linkedin, Mail } from "lucide-react";
 import { useTheme } from "../../context/ThemeContext";
-import dev from "../../assets/programmer.svg";
 
 function GeometricModel() {
   const mesh = useRef<THREE.Mesh>(null);
@@ -23,27 +22,16 @@ function GeometricModel() {
   return (
     <mesh ref={mesh} scale={[2, 2, 2]}>
       <dodecahedronGeometry args={[1, 0]} />
-      <meshStandardMaterial
-        color={theme === "dark" ? "#ff5733" : "#ff5733"}
-        wireframe
-      />
+      <meshStandardMaterial color="#ff5733" wireframe />
     </mesh>
   );
 }
-
-
 
 function ParticlesBackground() {
   const pointsRef = useRef<THREE.Points>(null);
   const { theme } = useTheme();
 
-  useEffect(() => {
-    if (!pointsRef.current) return;
-  }, []);
-
-  // Create particles
-  const particlesGeometry = new THREE.SphereGeometry(9, 64, 64); // Changed here
-
+  const particlesGeometry = new THREE.BufferGeometry();
   const particleCount = 1500;
   const positions = new Float32Array(particleCount * 3);
 
@@ -53,10 +41,7 @@ function ParticlesBackground() {
     positions[i + 2] = (Math.random() - 0.5) * 10;
   }
 
-  particlesGeometry.setAttribute(
-    "position",
-    new THREE.BufferAttribute(positions, 3),
-  );
+  particlesGeometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
 
   useFrame(() => {
     if (pointsRef.current) {
@@ -67,9 +52,8 @@ function ParticlesBackground() {
 
   return (
     <points ref={pointsRef}>
-      <bufferGeometry attach="geometry" {...particlesGeometry} />
+      <primitive object={particlesGeometry} attach="geometry" />
       <pointsMaterial
-        attach="material"
         size={0.08}
         sizeAttenuation
         color={theme === "dark" ? "#e83a17" : "#ff5733"}
@@ -79,7 +63,6 @@ function ParticlesBackground() {
     </points>
   );
 }
-
 
 const Hero: React.FC = () => {
   const socialLinks = [
@@ -92,10 +75,7 @@ const Hero: React.FC = () => {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        delayChildren: 0.3,
-        staggerChildren: 0.2,
-      },
+      transition: { delayChildren: 0.3, staggerChildren: 0.2 },
     },
   };
 
@@ -108,30 +88,24 @@ const Hero: React.FC = () => {
     },
   };
 
-  const canvasContainerVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 1 },
-    },
-  };
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
 
   return (
     <section
       id="home"
       className="min-h-screen flex items-center relative overflow-hidden pt-20 bg-white dark:bg-dark-950"
     >
-      <div className="absolute rounded-sm inset-0 z-0 opacity-50 dark:opacity-10">
+      {/* Canvas Background */}
+      <div className="absolute inset-0 z-0 h-[100vh] sm:h-full w-full opacity-50 dark:opacity-10">
         <Canvas camera={{ position: [0, 0, 6] }}>
           <ambientLight intensity={0.5} />
           <directionalLight position={[10, 10, 5]} intensity={1} />
           <ParticlesBackground />
           <OrbitControls
-            enableZoom={true}
-            enablePan={true}
-            enableRotate={true}
-            autoRotate={true}
+            enableZoom={!isMobile}
+            enablePan={!isMobile}
+            enableRotate
+            autoRotate
             autoRotateSpeed={1}
             maxPolarAngle={Math.PI / 2}
             minPolarAngle={Math.PI / 2}
@@ -145,8 +119,9 @@ const Hero: React.FC = () => {
         </Canvas>
       </div>
 
-      <div className="container mx-10 px-10 z-10">
-        <div className="grid lg:grid gap-12 items-center">
+      {/* Hero Text */}
+      <div className="container mx-4 px-4 sm:mx-10 sm:px-10 z-10">
+        <div className="grid gap-12 items-center">
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -155,7 +130,7 @@ const Hero: React.FC = () => {
           >
             <motion.h2
               variants={itemVariants}
-              className="text-xl text-center md:text-2xl font-medium  text-dark-900 dark:text-white mb-2"
+              className="text-xl text-center md:text-2xl font-medium text-dark-900 dark:text-white mb-2"
             >
               Hello, I'm
             </motion.h2>
@@ -173,14 +148,10 @@ const Hero: React.FC = () => {
             >
               <TypeAnimation
                 sequence={[
-                  "Frontend Developer",
-                  2000,
-                  "UI/UX Enthusiast",
-                  2000,
-                  "React Specialist",
-                  2000,
-                  "Web Animator",
-                  2000,
+                  "Frontend Developer", 2000,
+                  "UI/UX Enthusiast", 2000,
+                  "React Specialist", 2000,
+                  "Web Animator", 2000,
                 ]}
                 wrapper="span"
                 speed={50}
@@ -190,59 +161,56 @@ const Hero: React.FC = () => {
 
             <motion.p
               variants={itemVariants}
-              className="text-dark-600 text-center dark:text-dark-400 mb-8 "
+              className="text-dark-600 text-center dark:text-dark-400 mb-8"
             >
-              I build beautiful, interactive, and high-performance web
-              applications with modern technologies and best practices.
+              I build beautiful, interactive, and high-performance web applications
+              with modern technologies and best practices.
             </motion.p>
 
             <div className="flex justify-center">
-            <motion.div variants={itemVariants} className="flex items-center space-x-4 mb-8">
-              {socialLinks.map((link) => (
-                <motion.a
-                  key={link.name}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2 bg-dark-100 dark:bg-dark-800 text-dark-500 dark:text-dark-300 rounded-full hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  aria-label={link.name}
-                >
-                  {link.icon}
-                </motion.a>
-              ))}
-            </motion.div>
+              <motion.div variants={itemVariants} className="flex items-center space-x-4 mb-8">
+                {socialLinks.map((link) => (
+                  <motion.a
+                    key={link.name}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 bg-dark-100 dark:bg-dark-800 text-dark-500 dark:text-dark-300 rounded-full hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    aria-label={link.name}
+                  >
+                    {link.icon}
+                  </motion.a>
+                ))}
+              </motion.div>
             </div>
 
             <div className="flex justify-center">
-            <motion.div
-              variants={itemVariants}
-              className="flex flex-wrap gap-4"
-            >
-              <motion.a
-                href="#contact"
-                className="px-6 py-3 bg-primary-600 text-white rounded-lg shadow-lg hover:bg-primary-700 transition-colors"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Get in Touch
-              </motion.a>
-
-              <motion.a
-                href="#projects"
-                className="px-6 py-3 bg-dark-100 dark:bg-dark-800 text-dark-900 dark:text-white rounded-lg shadow-lg hover:bg-dark-200 dark:hover:bg-dark-700 transition-colors"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                View My Work
-              </motion.a>
-            </motion.div>
+              <motion.div variants={itemVariants} className="flex flex-wrap gap-4">
+                <motion.a
+                  href="#contact"
+                  className="px-6 py-3 bg-primary-600 text-white rounded-lg shadow-lg hover:bg-primary-700 transition-colors"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Get in Touch
+                </motion.a>
+                <motion.a
+                  href="#projects"
+                  className="px-6 py-3 bg-dark-100 dark:bg-dark-800 text-dark-900 dark:text-white rounded-lg shadow-lg hover:bg-dark-200 dark:hover:bg-dark-700 transition-colors"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  View My Work
+                </motion.a>
+              </motion.div>
             </div>
           </motion.div>
         </div>
       </div>
 
+      {/* Scroll Down */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -254,10 +222,7 @@ const Hero: React.FC = () => {
           className="flex flex-col items-center text-dark-500 dark:text-dark-400 hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
         >
           <span className="text-sm mb-2">Scroll Down</span>
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ repeat: Infinity, duration: 2 }}
-          >
+          <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 2 }}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
