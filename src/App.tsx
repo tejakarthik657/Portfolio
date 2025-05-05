@@ -6,6 +6,7 @@ import ScrollProgress from './components/ui/ScrollProgress';
 import CustomCursor from './components/ui/CustomCursor';
 import Experience from './components/sections/Experience';
 import Skills from './components/sections/Skills';
+import Achievements from './components/sections/Achievements';
 
 // Lazy load sections for better performance
 const Hero = lazy(() => import('./components/sections/Hero'));
@@ -34,6 +35,7 @@ function App() {
             <About />
             <Skills />
             <Projects />
+            <Achievements />
             <Contact />
           </Suspense>
         </main>
