@@ -141,9 +141,9 @@ function ParticlesBackground() {
 
 const Hero: React.FC = () => {
   const socialLinks = [
-    { name: "GitHub", icon: <Github />, url: "https://github.com/" },
-    { name: "LinkedIn", icon: <Linkedin />, url: "https://linkedin.com/" },
-    { name: "Email", icon: <Mail />, url: "mailto:nikhil-madaravena@gmail.com" },
+    { name: "GitHub", icon: <Github />, url: "https://github.com/Nikhil-Madaravena" },
+    { name: "LinkedIn", icon: <Linkedin />, url: "https://www.linkedin.com/in/nikhil-madaravena" },
+    { name: "Email", icon: <Mail />, url: "mailto:nikhil.madaravena@gmail.com" },
   ];
 
   const containerVariants = {
