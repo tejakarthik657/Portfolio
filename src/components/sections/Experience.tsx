@@ -75,7 +75,7 @@ const Experience: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
-              {educationItems.map((exp, i) => (
+              {educationItems.map((exp) => (
                 <motion.div
                   key={exp.id}
                   variants={itemVariants}
@@ -129,7 +129,7 @@ const Experience: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
-              {professionalItems.map((exp, i) => (
+              {professionalItems.map((exp) => (
                 <motion.div
                   key={exp.id}
                   variants={itemVariants}

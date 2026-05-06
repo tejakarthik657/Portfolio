@@ -164,7 +164,7 @@ const Hero: React.FC = () => {
             <div className="lg:col-span-7 flex flex-col sm:flex-row sm:items-center gap-6">
               <div className="w-12 h-px bg-white/30 shrink-0 hidden sm:block" />
               <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
-                {['Full-Stack Developer', 'Systems Engineer', 'Rust · React · Java'].map((label, i) => (
+                {['Full-Stack Developer', 'Systems Engineer', 'Rust · React · Java'].map((label) => (
                   <span key={label} className="font-mono text-[10px] text-mono-500 tracking-[0.25em] uppercase border border-white/[0.05] bg-white/[0.01] px-3 py-1.5 rounded-sm">{label}</span>
                 ))}
               </div>
