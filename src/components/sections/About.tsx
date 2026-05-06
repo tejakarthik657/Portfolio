@@ -1,104 +1,137 @@
 import React, { useEffect } from 'react';
-import { motion, useAnimation } from 'framer-motion';
-import { useInView } from 'framer-motion';
-import profile from '../../assets/analysis.svg';
+import { motion, useAnimation, useInView } from 'framer-motion';
 import Skills from './Skills';
 
 const About: React.FC = () => {
   const controls = useAnimation();
   const containerRef = React.useRef(null);
-  const isInView = useInView(containerRef, { once: true, amount: 0.3 });
+  const isInView = useInView(containerRef, { once: true, amount: 0.15 });
 
   useEffect(() => {
-    if (isInView) {
-      controls.start('visible');
-    }
+    if (isInView) controls.start('visible');
   }, [controls, isInView]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
+    visible: { opacity: 1, transition: { staggerChildren: 0.15 } },
   };
 
   const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: { duration: 0.5 }
-    }
+    hidden: { y: 40, opacity: 0 },
+    visible: { y: 0, opacity: 1, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
   };
 
   return (
-    <section id="about" className="py-20 bg-dark-50 dark:bg-dark-900">
-      <div className="container mx-auto px-4">
+    <section id="about" className="py-32 bg-[#080808] relative overflow-hidden">
+      {/* Background typographic noise */}
+      <div className="absolute top-1/4 -right-[10%] text-[15vw] font-display font-bold text-white/[0.02] leading-none select-none pointer-events-none mix-blend-overlay">
+        SYSTEMS
+      </div>
+      <div className="absolute bottom-10 -left-[5%] text-[15vw] font-display font-bold text-white/[0.02] leading-none select-none pointer-events-none mix-blend-overlay">
+        CRAFT
+      </div>
+
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
         <motion.div
           ref={containerRef}
           initial="hidden"
           animate={controls}
           variants={containerVariants}
         >
-          <motion.div variants={itemVariants} className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-dark-900 dark:text-white mb-4">
-              About <span className="text-primary-500">Me</span>
-            </h2>
-            <div className="w-20 h-1 bg-primary-500 mx-auto mb-6"></div>
+          {/* Top minimal header */}
+          <motion.div variants={itemVariants} className="flex items-center gap-6 mb-24">
+            <span className="font-mono text-xs text-mono-500 tracking-[0.3em] uppercase">01 // Identity</span>
+            <div className="flex-1 h-px bg-white/[0.05]" />
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-center">
-            <motion.div variants={itemVariants}>
-              <div className="relative mt-16 w-full h-72 md:h-96 lg:h-[600px] rounded-lg">
-                <img
-                  src={profile}
-                  alt="Developer"
-                  className="w-full h-full"
-                />
-            </div>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 items-start mb-24">
+            
+            {/* Left Column: The Manifesto (Col span 5) */}
+            <motion.div variants={itemVariants} className="lg:col-span-5 relative">
+              <div className="lg:sticky lg:top-32">
+                <div className="flex flex-col gap-6">
+                  <div className="w-12 h-px bg-white" />
+                  <h2 className="font-display font-bold text-5xl sm:text-6xl text-white tracking-tighter leading-[1.1]">
+                    Bridging <br/>
+                    <span className="text-mono-500">low-level</span><br/>
+                    architecture & <br/>
+                    <span className="text-gradient">high-level</span><br/>
+                    experiences.
+                  </h2>
+                </div>
+                
+                <div className="mt-16 grid grid-cols-2 gap-8">
+                  <div className="relative">
+                    <div className="absolute -left-4 top-2 w-px h-12 bg-white/20" />
+                    <div className="text-4xl font-display font-bold text-white mb-2">O(1)</div>
+                    <div className="text-[10px] font-mono text-mono-500 uppercase tracking-widest leading-relaxed">Latency<br/>Obsession</div>
+                  </div>
+                  <div className="relative">
+                    <div className="absolute -left-4 top-2 w-px h-12 bg-white/20" />
+                    <div className="text-4xl font-display font-bold text-white mb-2">60<span className="text-xl text-mono-500">fps</span></div>
+                    <div className="text-[10px] font-mono text-mono-500 uppercase tracking-widest leading-relaxed">Render<br/>Fidelity</div>
+                  </div>
+                </div>
+              </div>
             </motion.div>
-            <motion.div
-              variants={itemVariants}
-              className="flex flex-col items-center lg:items-start text-center lg:text-left px-4 sm:px-6 lg:px-10 py-6 max-w-5xl mx-auto"
-            >
-              {/* Who I Am */}
-              <h3 className="relative text-2xl sm:text-3xl font-bold text-dark-900 dark:text-white mb-3 after:content-[''] after:absolute after:-bottom-1 after:left-1/2 lg:after:left-0 after:-translate-x-1/2 lg:after:-translate-x-0 after:w-16 after:h-1 after:bg-primary-500 after:rounded-full">
-                Who I Am
-              </h3>
-              <p className="text-sm sm:text-base leading-relaxed text-dark-600 dark:text-dark-300 max-w-2xl mb-4 opacity-90">
-                I'm a front-end developer passionate about building clean, responsive, and user-focused digital experiences. I combine design sensibility with technical precision to deliver intuitive interfaces.
-              </p>
 
-              {/* What I Do */}
-              <h3 className="relative text-xl sm:text-2xl font-semibold text-dark-900 dark:text-white mt-6 mb-2 after:content-[''] after:absolute after:-bottom-1 after:left-1/2 lg:after:left-0 after:-translate-x-1/2 lg:after:-translate-x-0 after:w-14 after:h-1 after:bg-primary-500 after:rounded-full">
-                What I Do
-              </h3>
-              <p className="text-sm sm:text-base leading-relaxed text-dark-600 dark:text-dark-300 max-w-2xl mb-4 opacity-90">
-                I create modern web applications using <span className="font-medium text-dark-800 dark:text-white">React.js</span>, <span className="font-medium text-dark-800 dark:text-white">Three.js</span>, and <span className="font-medium text-dark-800 dark:text-white">Framer Motion</span>. My work blends performance, accessibility, and design precision.
-              </p>
+            {/* Right Column: The Prose (Col span 7) */}
+            <motion.div variants={itemVariants} className="lg:col-span-7 lg:pl-16 flex flex-col gap-12">
+              
+              {/* Editorial Text Block */}
+              <div>
+                <p className="text-xl sm:text-2xl text-mono-300 font-light leading-relaxed mb-8">
+                  I don't just write code; I <span className="text-white font-medium">engineer systems</span> from the ground up. Whether it's memory-safe concurrency in Rust or fluid 3D experiences in the browser, I obsess over the invisible details that make software truly exceptional.
+                </p>
+                
+                <div className="h-px w-full bg-white/[0.05] my-12" />
 
-              {/* My Approach */}
-              <h3 className="relative text-xl sm:text-2xl font-semibold text-dark-900 dark:text-white mt-6 mb-2 after:content-[''] after:absolute after:-bottom-1 after:left-1/2 lg:after:left-0 after:-translate-x-1/2 lg:after:-translate-x-0 after:w-14 after:h-1 after:bg-primary-500 after:rounded-full">
-                My Approach
-              </h3>
-              <p className="text-sm sm:text-base leading-relaxed text-dark-600 dark:text-dark-300 max-w-2xl mb-3 opacity-90">
-                I follow clean coding principles, emphasize scalability, and continuously explore new tools. Each project reflects thoughtful design and attention to detail.
-              </p>
-              <p className="text-sm sm:text-base leading-relaxed text-dark-600 dark:text-dark-300 max-w-2xl mb-3 opacity-90">
-                I'm active in the open-source community and stay aligned with modern front-end practices to create polished, adaptable solutions.
-              </p>
+                <div className="grid sm:grid-cols-2 gap-10">
+                  <div>
+                    <h3 className="text-xs font-mono text-white tracking-widest uppercase mb-5 flex items-center gap-3">
+                      <span className="w-1.5 h-1.5 bg-white rounded-sm" />
+                      Systems Engineering
+                    </h3>
+                    <p className="text-sm text-mono-400 leading-relaxed">
+                      Deep expertise in building robust backends with Spring Boot, Node.js, and complex PostgreSQL architectures. I explore the absolute limits of performance by engineering custom in-memory databases with Rust and strict memory safety.
+                    </p>
+                  </div>
+                  <div>
+                    <h3 className="text-xs font-mono text-white tracking-widest uppercase mb-5 flex items-center gap-3">
+                      <span className="w-1.5 h-1.5 bg-white rounded-sm" />
+                      Interface Architecture
+                    </h3>
+                    <p className="text-sm text-mono-400 leading-relaxed">
+                      Translating complex data into immersive, interactive interfaces. I leverage React.js, Framer Motion, and Three.js to construct UIs that feel alive, prioritizing rendering performance, micro-interactions, and visual precision.
+                    </p>
+                  </div>
+                </div>
+              </div>
 
-              {/* Final Call to Action */}
-              <p className="text-sm sm:text-base leading-relaxed text-dark-600 dark:text-dark-300 max-w-2xl mt-4 opacity-90 font-medium">
-                Open to new opportunities and collaborations — let’s build something impactful together.
-              </p>
+              {/* Minimal Skill Tags */}
+              <div className="mt-4 pt-10 border-t border-white/[0.05]">
+                <p className="text-[10px] font-mono text-mono-600 tracking-widest uppercase mb-5">Core Arsenal</p>
+                <div className="flex flex-wrap gap-2.5">
+                  {['Rust', 'Java', 'Spring Boot', 'React.js', 'PostgreSQL', 'Three.js', 'TypeScript', 'Node.js'].map((tag) => (
+                    <span key={tag} className="px-4 py-2 border border-white/10 text-[11px] font-mono text-mono-300 tracking-widest uppercase rounded-sm hover:bg-white hover:text-[#080808] transition-colors duration-300 cursor-default">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
             </motion.div>
           </div>
+
+          {/* Full-width Skills Component */}
+          <motion.div variants={itemVariants} className="mt-32 pt-16 border-t border-white/[0.05]">
+            <Skills />
+          </motion.div>
+
         </motion.div>
       </div>
+      
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
     </section>
   );
 };

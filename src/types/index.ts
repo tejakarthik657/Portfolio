@@ -16,6 +16,7 @@ export interface Experience {
   duration: string;
   description: string[];
   logo: string;
+  type: 'education' | 'experience';
 }
 
 export interface Skill {

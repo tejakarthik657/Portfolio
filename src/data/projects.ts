@@ -1,48 +1,64 @@
 import { Project } from '../types';
-import syntaxErrorImage from '../assets/syntaxerror.png';
-import doodleDelightImage from '../assets/doodledelight.png';
-import neoVisionImage from '../assets/neovision.png';
-
 
 export const projects: Project[] = [
   {
     id: 1,
-    title: 'ClinicPing',
-    description: 'A healthcare management solution that helps users find and book appointments with hospitals nearby using geospatial visualization.',
-    image: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    techStack: ['React', 'Node.js', 'Globe.gl', 'Leaflet.js'],
-    liveUrl: 'https://clinicping-hr.netlify.app/',
-    githubUrl: 'https://github.com/Nikhil-Madaravena/ClinicPing',
-    category: ['fullstack', 'featured', 'visualization']
+    title: 'Kivo — In-Memory Database',
+    description: 'A high-performance in-memory key-value database engineered in Rust with O(1) average-time operations, 40% reduced lookup latency, and a modular execution pipeline for request parsing and response handling.',
+    image: '',
+    techStack: ['Rust', 'Systems Programming', 'Hash Structures', 'Memory Safety'],
+    liveUrl: 'https://kivo-in-memory-db.vercel.app/',
+    githubUrl: 'https://github.com/Nikhil-Madaravena/Kivo-InMemory-Database',
+    category: ['featured', 'fullstack'],
   },
   {
     id: 2,
-    title: 'SyntaxError',
-    description: 'An interactive programming resources website offering tutorials and guides for learners and enthusiasts.',
-    image: syntaxErrorImage,
-    techStack: ['HTML', 'CSS', 'JavaScript'],
-    liveUrl: 'https://syntaxerror-hr.netlify.app/',
-    githubUrl: 'https://github.com/Nikhil-Madaravena/SyntaxError',
-    category: ['frontend', 'education']
+    title: 'Makko SaaS Provider',
+    description: 'A comprehensive Software-as-a-Service platform. Features a robust editor, drag-and-drop website building capabilities, secure user authentication, and a high-performance backend serving live previews.',
+    image: '',
+    techStack: ['TypeScript', 'React.js', 'Node.js', 'Database Architecture'],
+    liveUrl: 'https://makko-saas-provider.vercel.app/',
+    githubUrl: 'https://github.com/Nikhil-Madaravena/Makko-SaaS-Provider',
+    category: ['fullstack', 'featured'],
   },
   {
     id: 3,
-    title: 'DoodleDelight',
-    description: 'An e-commerce platform focused on children’s products, offering a colorful and engaging UI.',
-    image: doodleDelightImage,
-    techStack: ['HTML', 'CSS', 'JavaScript'],
-    liveUrl: 'https://doodledelight-hr.netlify.app/',
-    githubUrl: 'https://github.com/Nikhil-Madaravena/DoodleDelight',
-    category: ['frontend', 'ecommerce']
+    title: 'Technical Club Website',
+    description: 'The official web platform for KITSW\'s technical club. Developed a scalable frontend architecture and a RESTful backend for managing events, registrations, and real-time announcements.',
+    image: '',
+    techStack: ['TypeScript', 'React.js', 'Express', 'PostgreSQL'],
+    liveUrl: 'https://technical-club-kitsw.vercel.app',
+    githubUrl: 'https://github.com/Nikhil-Madaravena/Technical-Club-Website',
+    category: ['frontend', 'fullstack'],
   },
   {
     id: 4,
+    title: 'OpenBlog Platform',
+    description: 'Scalable blogging platform with multi-user authentication, secure authorization, role-based access control, and optimized database queries reducing response time significantly.',
+    image: '',
+    techStack: ['TypeScript', 'React.js', 'PostgreSQL', 'Fullstack'],
+    liveUrl: '',
+    githubUrl: 'https://github.com/Nikhil-Madaravena/OpenBlog',
+    category: ['fullstack', 'featured'],
+  },
+  {
+    id: 5,
+    title: 'ClinicPing',
+    description: 'Location-aware healthcare platform for finding and booking appointments with nearby hospitals using geospatial visualization. Dynamic fallback logic improved booking success rate by 30%.',
+    image: '',
+    techStack: ['React.js', 'Node.js', 'Globe.gl', 'Leaflet.js'],
+    liveUrl: 'https://clinicping-health-hub.vercel.app/',
+    githubUrl: 'https://github.com/Nikhil-Madaravena/ClinicPing',
+    category: ['fullstack'],
+  },
+  {
+    id: 6,
     title: 'NeoVision',
-    description: 'A visualization tool for exploring Near-Earth Objects (NEOs) and space data with interactive 3D elements.',
-    image: neoVisionImage,
-    techStack: ['React', 'Node.js', 'Three.js', 'Sass'],
-    liveUrl: 'https://neovision-hr.netlify.app/',
+    description: 'Full-stack 3D visualization platform rendering Near-Earth Objects at 60 FPS. Improved rendering efficiency by 35% through optimized Three.js scene management with REST API-driven real-time updates.',
+    image: '',
+    techStack: ['React.js', 'Node.js', 'Three.js', 'REST APIs'],
+    liveUrl: 'https://neo-vision-hr.vercel.app/',
     githubUrl: 'https://github.com/Nikhil-Madaravena/NeoVision',
-    category: ['frontend', 'visualization', 'featured']
-  }
+    category: ['frontend', 'featured'],
+  },
 ];
