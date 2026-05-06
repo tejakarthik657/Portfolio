@@ -108,14 +108,14 @@ const Hero: React.FC = () => {
 
       {/* ── Corner Brackets (TL) ── */}
       <div ref={bracketsTLRef} className="absolute top-8 left-8 z-20 pointer-events-none">
-        <div className="bracket-h absolute top-0 left-0 w-10 h-px bg-white/30" style={{ transformOrigin: 'left center', scaleX: 0 }} />
-        <div className="bracket-v absolute top-0 left-0 w-px h-10 bg-white/30" style={{ transformOrigin: 'top center', scaleY: 0 }} />
+        <div className="bracket-h absolute top-0 left-0 w-10 h-px bg-white/30" style={{ transformOrigin: 'left center', transform: 'scaleX(0)' }} />
+        <div className="bracket-v absolute top-0 left-0 w-px h-10 bg-white/30" style={{ transformOrigin: 'top center', transform: 'scaleY(0)' }} />
       </div>
 
       {/* ── Corner Brackets (BR) ── */}
       <div ref={bracketsBRRef} className="absolute bottom-8 right-8 z-20 pointer-events-none">
-        <div className="bracket-h absolute bottom-0 right-0 w-10 h-px bg-white/30" style={{ transformOrigin: 'right center', scaleX: 0 }} />
-        <div className="bracket-v absolute bottom-0 right-0 w-px h-10 bg-white/30" style={{ transformOrigin: 'bottom center', scaleY: 0 }} />
+        <div className="bracket-h absolute bottom-0 right-0 w-10 h-px bg-white/30" style={{ transformOrigin: 'right center', transform: 'scaleX(0)' }} />
+        <div className="bracket-v absolute bottom-0 right-0 w-px h-10 bg-white/30" style={{ transformOrigin: 'bottom center', transform: 'scaleY(0)' }} />
       </div>
 
       {/* ── Main Content ── */}
