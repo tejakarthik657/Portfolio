@@ -7,6 +7,7 @@ export interface Project {
   liveUrl?: string;
   githubUrl?: string;
   category: string[];
+  highlights: { value: string; label: string }[];
 }
 
 export interface Experience {

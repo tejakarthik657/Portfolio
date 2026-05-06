@@ -10,6 +10,11 @@ export const projects: Project[] = [
     liveUrl: 'https://kivo-in-memory-db.vercel.app/',
     githubUrl: 'https://github.com/Nikhil-Madaravena/Kivo-InMemory-Database',
     category: ['featured', 'fullstack'],
+    highlights: [
+      { value: 'O(1)', label: 'Avg Lookup Time' },
+      { value: '40%', label: 'Latency Reduction' },
+      { value: 'Rust', label: 'Memory-Safe Core' },
+    ],
   },
   {
     id: 2,
@@ -20,6 +25,11 @@ export const projects: Project[] = [
     liveUrl: 'https://makko-saas-provider.vercel.app/',
     githubUrl: 'https://github.com/Nikhil-Madaravena/Makko-SaaS-Provider',
     category: ['fullstack', 'featured'],
+    highlights: [
+      { value: 'SaaS', label: 'Platform Architecture' },
+      { value: 'JWT', label: 'Secure Auth Layer' },
+      { value: 'Live', label: 'Preview Engine' },
+    ],
   },
   {
     id: 3,
@@ -30,6 +40,11 @@ export const projects: Project[] = [
     liveUrl: 'https://technical-club-kitsw.vercel.app',
     githubUrl: 'https://github.com/Nikhil-Madaravena/Technical-Club-Website',
     category: ['frontend', 'fullstack'],
+    highlights: [
+      { value: 'REST', label: 'API Architecture' },
+      { value: 'PgSQL', label: 'Database Layer' },
+      { value: 'KITSW', label: 'Official Platform' },
+    ],
   },
   {
     id: 4,
@@ -40,6 +55,11 @@ export const projects: Project[] = [
     liveUrl: '',
     githubUrl: 'https://github.com/Nikhil-Madaravena/OpenBlog',
     category: ['fullstack', 'featured'],
+    highlights: [
+      { value: 'RBAC', label: 'Access Control' },
+      { value: 'Multi', label: 'User System' },
+      { value: '35%', label: 'Query Optimization' },
+    ],
   },
   {
     id: 5,
@@ -50,6 +70,11 @@ export const projects: Project[] = [
     liveUrl: 'https://clinicping-health-hub.vercel.app/',
     githubUrl: 'https://github.com/Nikhil-Madaravena/ClinicPing',
     category: ['fullstack'],
+    highlights: [
+      { value: '+30%', label: 'Booking Success' },
+      { value: 'Geo', label: 'Spatial Mapping' },
+      { value: 'Globe', label: '3D Visualization' },
+    ],
   },
   {
     id: 6,
@@ -60,5 +85,10 @@ export const projects: Project[] = [
     liveUrl: 'https://neo-vision-hr.vercel.app/',
     githubUrl: 'https://github.com/Nikhil-Madaravena/NeoVision',
     category: ['frontend', 'featured'],
+    highlights: [
+      { value: '60fps', label: 'Render Fidelity' },
+      { value: '35%', label: 'Efficiency Gain' },
+      { value: '3D', label: 'Space Mapping' },
+    ],
   },
 ];

@@ -4,11 +4,18 @@ import { ArrowUpRight } from 'lucide-react';
 
 const achievements = [
   {
-    year: '2024',
+    year: '2026',
     title: 'TCS National Qualifier Test (NQT)',
     category: 'Assessment',
     award: '100% Programming Score',
     organization: 'Tata Consultancy Services',
+  },
+    {
+    year: '2025',
+    title: 'Google Cloud Computing Foundations',
+    category: 'Certification',
+    award: 'Certified',
+    organization: 'Google Cloud',
   },
   {
     year: '2024',
@@ -16,13 +23,6 @@ const achievements = [
     category: 'Hackathon',
     award: 'Local Nominee & Regional Winner',
     organization: 'Chandigarh University',
-  },
-  {
-    year: '2024',
-    title: 'Google Cloud Computing Foundations',
-    category: 'Certification',
-    award: 'Certified',
-    organization: 'Google Cloud',
   },
   {
     year: '2024',
