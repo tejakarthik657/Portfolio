@@ -125,81 +125,75 @@ const Hero: React.FC = () => {
         <div className="h-24" />
 
         {/* ─── Hero Grid ─── */}
-        <div className="flex-1 max-w-6xl mx-auto w-full px-6 flex flex-col justify-center">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 items-end">
+        <div className="flex-1 max-w-6xl mx-auto w-full px-6 flex flex-col justify-center pt-24">
 
-            {/* Left: Status + Massive Name */}
-            <div className="lg:col-span-8 flex flex-col justify-end">
+          {/* Status row */}
+          <div className="flex items-center gap-4 mb-12">
+            <div className="flex items-center gap-2 border border-white/10 bg-white/[0.02] px-4 py-2 rounded-full">
+              <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+              <span className="font-mono text-[9px] text-mono-400 tracking-[0.25em] uppercase">Available</span>
+            </div>
+            <div className="h-px w-10 bg-white/15" />
+            <span className="font-mono text-[9px] text-mono-600 tracking-widest uppercase hidden sm:block">Open to new opportunities</span>
+          </div>
 
-              {/* Status row */}
-              <div className="flex items-center gap-4 mb-10">
-                <div className="flex items-center gap-2 border border-white/10 px-3 py-1.5 rounded-full">
-                  <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                  <span className="font-mono text-[9px] text-mono-400 tracking-[0.25em] uppercase">Available</span>
-                </div>
-                <div className="h-px w-6 bg-white/15" />
-                <span className="font-mono text-[9px] text-mono-600 tracking-widest uppercase">Open to new opportunities</span>
+          {/* Headline — letter-by-letter animated (Full Width) */}
+          <div ref={headlineRef} className="leading-none mb-16 relative">
+            <h1 className="font-display font-bold tracking-tighter uppercase leading-[0.85]">
+              {/* NIKHIL — solid white */}
+              <div style={{ clipPath: 'inset(-20% -20% 0 -20%)' }}>
+                <SplitLetters
+                  text="Nikhil"
+                  className="text-[clamp(3.5rem,10vw,7rem)] text-white whitespace-nowrap"
+                />
               </div>
-
-              {/* Headline — letter-by-letter animated */}
-              <div ref={headlineRef} className="overflow-visible leading-none mb-8">
-                <h1 className="font-display font-bold tracking-tighter uppercase leading-[0.85]">
-                  {/* NIKHIL — solid white */}
-                  <div className="overflow-hidden">
-                    <SplitLetters
-                      text="Nikhil"
-                      className="text-[clamp(3rem,7.5vw,7rem)] text-white whitespace-nowrap"
-                    />
-                  </div>
-                  {/* MADARAVENA — hollow outline, fills on hover */}
-                  <div className="overflow-hidden">
-                    <SplitLetters
-                      text="Madaravena"
-                      className="text-[clamp(3rem,7.5vw,7rem)] hollow-name cursor-default whitespace-nowrap"
-                    />
-                  </div>
-                </h1>
+              {/* MADARAVENA — hollow outline, fills on hover */}
+              <div style={{ clipPath: 'inset(-20% -20% 0 -20%)' }}>
+                <SplitLetters
+                  text="Madaravena"
+                  className="text-[clamp(3.5rem,10vw,7rem)] hollow-name cursor-default whitespace-nowrap"
+                />
               </div>
+            </h1>
+          </div>
 
-              {/* Descriptor strip */}
-              <div className="flex items-center gap-5 mb-0 overflow-hidden">
-                <div className="w-8 h-px bg-white/30 shrink-0" />
-                <div className="flex flex-wrap items-center gap-x-5 gap-y-1">
-                  {['Full-Stack Developer', 'Systems Engineer', 'Rust · React · Java'].map((label, i) => (
-                    <span key={label} className="font-mono text-[10px] text-mono-500 tracking-[0.25em] uppercase">{label}</span>
-                  ))}
-                </div>
+          {/* ─── Descriptors & Meta Row ─── */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start border-t border-white/[0.05] pt-10">
+            
+            {/* Left: Descriptors */}
+            <div className="lg:col-span-7 flex flex-col sm:flex-row sm:items-center gap-6">
+              <div className="w-12 h-px bg-white/30 shrink-0 hidden sm:block" />
+              <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+                {['Full-Stack Developer', 'Systems Engineer', 'Rust · React · Java'].map((label, i) => (
+                  <span key={label} className="font-mono text-[10px] text-mono-500 tracking-[0.25em] uppercase border border-white/[0.05] bg-white/[0.01] px-3 py-1.5 rounded-sm">{label}</span>
+                ))}
               </div>
             </div>
 
-            {/* Right: Meta Data Column */}
+            {/* Right: Meta Column */}
             <div
               ref={metaColRef}
               style={{ opacity: 0 }}
-              className="lg:col-span-4 hidden lg:flex flex-col gap-8 pb-2 pl-12 border-l border-white/[0.06] self-end"
+              className="lg:col-span-5 flex flex-col gap-6 lg:pl-10 lg:border-l border-white/[0.06]"
             >
-              {/* Description */}
-              <p className="font-mono text-xs text-mono-500 leading-relaxed max-w-xs">
+              <p className="font-mono text-xs text-mono-500 leading-relaxed">
                 Engineering production-scale systems — from{' '}
                 <span className="text-white">Rust in-memory databases</span>{' '}
                 to <span className="text-white">60fps 3D interfaces</span>.
               </p>
-
-              {/* Social links */}
-              <div className="flex flex-col gap-3">
+              
+              {/* Social links row */}
+              <div className="flex items-center gap-4">
                 {socialLinks.map(link => (
                   <a
                     key={link.name}
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-between text-mono-500 hover:text-white transition-colors duration-300 group py-2 border-b border-white/[0.05] last:border-0"
+                    className="flex items-center gap-2 text-mono-500 hover:text-white transition-colors duration-300 group px-3 py-2 border border-white/[0.05] hover:border-white/20 hover:bg-white/[0.02] rounded-sm"
                   >
-                    <span className="font-mono text-[10px] tracking-widest uppercase">{link.name}</span>
-                    <div className="flex items-center gap-2">
-                      {link.icon}
-                      <ArrowUpRight size={10} className="opacity-0 group-hover:opacity-100 transition-opacity -translate-x-1 group-hover:translate-x-0 duration-300" />
-                    </div>
+                    {link.icon}
+                    <span className="font-mono text-[9px] tracking-widest uppercase">{link.name}</span>
                   </a>
                 ))}
               </div>
@@ -245,18 +239,20 @@ const Hero: React.FC = () => {
       </div>
 
       {/* ── Bottom Ticker Tape ── */}
-      <div ref={tickerRef} style={{ opacity: 0 }} className="relative z-10 border-t border-white/[0.05] bg-white/[0.01] py-3 overflow-hidden">
-        <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-[#080808] to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-[#080808] to-transparent z-10 pointer-events-none" />
-        <div className="ticker-inner flex gap-0 w-max">
-          {[...tickerItems, ...tickerItems, ...tickerItems].map((item, i) => (
-            <span
-              key={i}
-              className={`font-mono text-[10px] tracking-[0.25em] uppercase px-5 whitespace-nowrap ${item === '·' ? 'text-white/20' : 'text-mono-600'}`}
-            >
-              {item}
-            </span>
-          ))}
+      <div className="w-full max-w-6xl mx-auto px-6 pb-8">
+        <div ref={tickerRef} style={{ opacity: 0 }} className="relative z-10 border border-white/[0.05] bg-white/[0.01] py-3.5 overflow-hidden rounded-sm">
+          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#080808] to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#080808] to-transparent z-10 pointer-events-none" />
+          <div className="ticker-inner flex gap-0 w-max">
+            {[...tickerItems, ...tickerItems, ...tickerItems].map((item, i) => (
+              <span
+                key={i}
+                className={`font-mono text-[10px] tracking-[0.25em] uppercase px-6 whitespace-nowrap ${item === '·' ? 'text-white/20' : 'text-mono-600'}`}
+              >
+                {item}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
 
