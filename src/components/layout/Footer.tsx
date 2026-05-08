@@ -20,11 +20,52 @@ const Footer: React.FC = () => {
         <div className="flex flex-col md:flex-row md:items-start justify-between gap-12 mb-14">
           {/* Brand */}
           <div className="max-w-xs">
-            <div className="flex items-center gap-3 mb-4">
-              <span className="w-8 h-8 rounded-sm bg-white flex items-center justify-center">
-                <span className="font-display font-bold text-[#080808] text-sm leading-none">NM</span>
-              </span>
-              <span className="font-display font-semibold text-white text-sm">Nikhil Madaravena</span>
+            <div className="flex items-center gap-5 mb-6 group cursor-default">
+              <div className="relative flex items-center justify-center w-9 h-9">
+                {/* The Core Box */}
+                <div className="relative z-10 w-full h-full border border-white/20 group-hover:border-white/50 bg-[#050505] transition-colors duration-500 flex flex-col justify-between p-1 overflow-hidden">
+                  
+                  {/* Internal Scanline */}
+                  <div className="absolute inset-0 bg-white/[0.03] -translate-y-full group-hover:translate-y-full transition-transform duration-[1.5s] ease-in-out" />
+                  
+                  {/* Top Row */}
+                  <div className="flex justify-between items-start w-full relative z-10">
+                    <span className="font-mono text-[8px] font-bold leading-none text-white tracking-widest">N</span>
+                    <div className="flex gap-0.5">
+                      <div className="w-1 h-1 bg-white/20 group-hover:bg-white transition-colors duration-500 delay-100" />
+                      <div className="w-1 h-1 bg-white/20 group-hover:bg-white transition-colors duration-500 delay-200" />
+                    </div>
+                  </div>
+                  
+                  {/* Bottom Row */}
+                  <div className="flex justify-between items-end w-full relative z-10">
+                    <div className="flex flex-col gap-[1px] w-full pr-2 pb-0.5">
+                      <div className="w-full h-px bg-white/20 group-hover:bg-white/50 scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 delay-100" />
+                      <div className="w-2/3 h-px bg-white/20 group-hover:bg-white/50 scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 delay-200" />
+                    </div>
+                    <span className="font-mono text-[8px] font-bold leading-none text-white tracking-widest">M</span>
+                  </div>
+                  
+                  {/* Targeting Reticle Corners */}
+                  <div className="absolute top-0 left-0 w-1.5 h-1.5 border-t border-l border-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute bottom-0 right-0 w-1.5 h-1.5 border-b border-r border-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </div>
+
+                {/* Surrounding Frame */}
+                <div className="absolute inset-[-4px] border border-white/5 opacity-0 group-hover:opacity-100 scale-95 group-hover:scale-100 transition-all duration-500 pointer-events-none" />
+              </div>
+
+              <div className="flex flex-col justify-center gap-1">
+                <span className="font-display font-bold text-white text-xs tracking-[0.2em] uppercase transition-all duration-500 group-hover:tracking-[0.25em]">
+                  Nikhil Madaravena
+                </span>
+                <div className="flex items-center gap-2">
+                  <div className="h-px bg-white/20 w-4 group-hover:w-8 transition-all duration-500" />
+                  <span className="font-mono text-[8px] text-mono-500 tracking-[0.3em] uppercase leading-none group-hover:text-white transition-colors duration-500">
+                    System_Node // 01
+                  </span>
+                </div>
+              </div>
             </div>
             <p className="text-xs text-mono-600 leading-relaxed font-mono">
               Full-Stack Developer & Systems Engineer.<br />
