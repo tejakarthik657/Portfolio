@@ -28,6 +28,8 @@ export const skills = [
   { name: 'C',              percentage: 88, category: 'programming', icon: 'SiC' },
   { name: 'Python',         percentage: 78, category: 'programming', icon: 'FaPython' },
   { name: 'SQL',            percentage: 80, category: 'programming', icon: 'SiSqlite' },
+  { name: 'Go',             percentage: 75, category: 'programming', icon: 'SiGo' },
+  { name: 'R',              percentage: 70, category: 'programming', icon: 'SiR' },
 
   // Visualization
   { name: 'Leaflet.js',     percentage: 82, category: 'visualization', icon: 'SiLeaflet' },
@@ -47,4 +49,7 @@ export const skills = [
   { name: 'Vercel',         percentage: 88, category: 'tools', icon: 'SiVercel' },
   { name: 'Netlify',        percentage: 85, category: 'tools', icon: 'SiNetlify' },
   { name: 'VS Code',        percentage: 92, category: 'tools', icon: 'VscVscode' },
+  { name: 'Jenkins',        percentage: 75, category: 'tools', icon: 'SiJenkins' },
+  { name: 'IntelliJ IDEA',  percentage: 85, category: 'tools', icon: 'SiIntellijidea' },
+  { name: 'Eclipse',        percentage: 80, category: 'tools', icon: 'SiEclipseide' },
 ];

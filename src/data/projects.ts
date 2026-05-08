@@ -91,4 +91,19 @@ export const projects: Project[] = [
       { value: '3D', label: 'Space Mapping' },
     ],
   },
+  {
+    id: 7,
+    title: 'AlgoViz V2',
+    description: 'Interactive algorithm visualization platform visualizing sorting, searching, and graph algorithms with step-by-step explanations and multi-language support across 8 programming languages.',
+    image: '',
+    techStack: ['React.js', 'JavaScript', 'CSS3', 'Educational'],
+    liveUrl: '',
+    githubUrl: 'https://github.com/2303A52012/algoviz',
+    category: ['frontend', 'featured'],
+    highlights: [
+      { value: '32', label: 'Algorithms & DS' },
+      { value: '8', label: 'Languages' },
+      { value: 'Interactive', label: 'Visualizations' },
+    ],
+  },
 ];

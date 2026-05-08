@@ -12,12 +12,12 @@ const getIconComponent = (iconName: string) => {
 };
 
 const skillCategories = [
-  { name: 'Frontend', id: 'frontend' },
-  { name: 'Backend', id: 'backend' },
-  { name: 'Systems', id: 'programming' },
-  { name: 'Visualization', id: 'visualization' },
-  { name: 'Architecture', id: 'design' },
-  { name: 'Infrastructure', id: 'tools' },
+  { name: 'Client Architecture', id: 'frontend' },
+  { name: 'Server Systems', id: 'backend' },
+  { name: 'Core Languages', id: 'programming' },
+  { name: 'Data Visualization', id: 'visualization' },
+  { name: 'Design Engineering', id: 'design' },
+  { name: 'DevOps & Tooling', id: 'tools' },
 ];
 
 const Skills: React.FC = () => {
@@ -51,10 +51,10 @@ const Skills: React.FC = () => {
       <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16 relative z-10">
         <div className="max-w-md">
           <h3 className="font-display font-bold text-3xl sm:text-4xl text-white mb-4">
-            Technical <span className="text-gradient">Arsenal</span>
+            System <span className="text-gradient">Topology</span>
           </h3>
           <p className="text-mono-400 text-sm leading-relaxed">
-            A modular breakdown of my active technology stack. Progress bars are obsolete; these are active systems.
+            A mapped index of my core technical competencies. System proficiencies are calibrated against production-grade deployment standards.
           </p>
         </div>
 
@@ -102,47 +102,51 @@ const Skills: React.FC = () => {
                 const Icon = getIconComponent(skill.icon);
                 
                 // Determine text label instead of percentage
-                const masteryLabel = skill.percentage >= 90 ? 'Mastery' : skill.percentage >= 80 ? 'Advanced' : 'Proficient';
+                const masteryLabel = skill.percentage >= 90 ? 'SYS_MASTER' : skill.percentage >= 80 ? 'SYS_ADVANCED' : 'SYS_PROFICIENT';
 
                 return (
                   <motion.div
                     key={skill.name}
                     variants={itemVariants}
-                    className="relative group p-6 border border-white/[0.05] bg-gradient-to-b from-transparent to-white/[0.01] hover:border-white/20 transition-all duration-500 overflow-hidden cursor-default"
+                    className="relative group p-6 border border-white/[0.08] bg-[#0a0a0a] hover:border-white/30 hover:bg-[#0d0d0d] transition-all duration-500 overflow-hidden cursor-default hover:shadow-[0_0_30px_rgba(255,255,255,0.03)]"
                   >
                     {/* Hover Glow Background */}
-                    <div className="absolute inset-0 bg-white/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/[0.04] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
                     
                     {/* Animated Targeting Brackets */}
-                    <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-white/30 opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-x-1 -translate-y-1 group-hover:translate-x-0 group-hover:translate-y-0" />
-                    <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-white/30 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-1 translate-y-1 group-hover:translate-x-0 group-hover:translate-y-0" />
+                    <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-white/50 opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-x-2 -translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0" />
+                    <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-white/50 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-2 translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0" />
 
                     <div className="flex items-start justify-between mb-10 relative z-10">
                       {/* Icon Block */}
-                      <div className="w-12 h-12 flex items-center justify-center rounded-sm border border-white/[0.08] bg-[#0a0a0a] group-hover:bg-white group-hover:shadow-[0_0_20px_rgba(255,255,255,0.15)] transition-all duration-500">
+                      <div className="w-12 h-12 flex items-center justify-center rounded-sm border border-white/[0.1] bg-[#050505] group-hover:bg-white group-hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-500">
                         <Icon className="w-6 h-6 text-mono-400 group-hover:text-[#080808] transition-colors duration-500" />
                       </div>
                       
                       {/* Identifier */}
-                      <div className="text-[10px] font-mono text-mono-600 tracking-widest text-right leading-relaxed">
-                        MOD_<br/>{String(index + 1).padStart(2, '0')}
+                      <div className="text-[9px] font-mono tracking-[0.2em] text-right leading-relaxed flex flex-col items-end gap-1">
+                        <span className="text-white/20">NODE_{String(index + 1).padStart(3, '0')}</span>
+                        <span className="text-white/40">{skill.percentage}%_CAP</span>
                       </div>
                     </div>
 
                     <div className="relative z-10 flex flex-col justify-end">
-                      <h4 className="font-display font-semibold text-white tracking-wide text-lg mb-3">{skill.name}</h4>
+                      <h4 className="font-display font-bold text-white tracking-wide text-lg mb-4 group-hover:translate-x-1 transition-transform duration-300">{skill.name}</h4>
                       
                       {/* Status Row */}
-                      <div className="flex items-center justify-between border-t border-white/[0.05] pt-4 mt-1">
+                      <div className="flex items-center justify-between border-t border-white/[0.08] pt-4 mt-1 relative">
+                        {/* Status Pulse line that animates across */}
+                        <div className="absolute top-0 left-0 h-px w-0 bg-white/40 group-hover:w-full transition-all duration-700 ease-in-out" />
+                        
                         {/* Status Pulse */}
                         <div className="flex gap-1.5">
-                          <div className="w-1 h-1 bg-white/10 group-hover:bg-white/80 group-hover:animate-pulse transition-colors duration-300 delay-75" />
-                          <div className="w-1 h-1 bg-white/10 group-hover:bg-white/50 transition-colors duration-300 delay-150" />
-                          <div className="w-1 h-1 bg-white/10 group-hover:bg-white/30 transition-colors duration-300 delay-200" />
+                          <div className="w-1.5 h-1.5 bg-white/10 group-hover:bg-white group-hover:shadow-[0_0_8px_rgba(255,255,255,0.8)] transition-all duration-300 delay-75 rounded-full" />
+                          <div className="w-1.5 h-1.5 bg-white/10 group-hover:bg-white/60 transition-all duration-300 delay-150 rounded-full" />
+                          <div className="w-1.5 h-1.5 bg-white/10 group-hover:bg-white/30 transition-all duration-300 delay-200 rounded-full" />
                         </div>
                         
                         {/* Classification Label */}
-                        <span className="text-[10px] font-mono text-mono-600 uppercase tracking-widest group-hover:text-mono-300 transition-colors duration-300">
+                        <span className="text-[9px] font-mono text-mono-500 uppercase tracking-widest group-hover:text-white transition-colors duration-300">
                           {masteryLabel}
                         </span>
                       </div>

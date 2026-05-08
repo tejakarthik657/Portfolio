@@ -31,4 +31,28 @@ export const experiences: Experience[] = [
     ],
     logo: 'https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg?auto=compress&cs=tinysrgb&w=80',
   },
+  {
+    id: 3,
+    type: 'experience',
+    company: 'Technical Club KITSW',
+    role: 'Executive Member',
+    duration: '2023 – Present',
+    description: [
+      'Organized and coordinated multiple technical events, workshops, and coding competitions.',
+      'Fostered a collaborative environment to help students enhance their practical technical skills.',
+    ],
+    logo: 'https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg?auto=compress&cs=tinysrgb&w=80',
+  },
+  {
+    id: 4,
+    type: 'experience',
+    company: 'Kakatiya Institute of Technology and Science (KITSW)',
+    role: 'Web Development Summer Intern',
+    duration: 'Summer Intern',
+    description: [
+      'Developed IDRS (Institute Document Retrieval System), a comprehensive document management system for the institute.',
+      'Streamlined document storage, categorization, and retrieval processes for administration.',
+    ],
+    logo: 'https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg?auto=compress&cs=tinysrgb&w=80',
+  },
 ];
