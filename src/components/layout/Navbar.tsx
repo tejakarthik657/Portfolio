@@ -85,18 +85,46 @@ const Navbar: React.FC = () => {
     >
       <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
         
-        {/* Logo */}
-        <a ref={logoRef} href="#home" onClick={() => setActiveLink('home')} className="flex items-center gap-4 group">
-          <div className="w-9 h-9 bg-white flex items-center justify-center rounded-sm group-hover:bg-mono-200 transition-colors duration-300">
-            <span className="font-display font-bold text-[#080808] text-sm leading-none tracking-tight">NM</span>
+        {/* Advanced Architectural Logo */}
+        <a ref={logoRef} href="#home" onClick={() => setActiveLink('home')} className="flex items-center gap-5 group">
+          <div className="relative w-11 h-11 flex items-center justify-center shrink-0">
+            {/* Outer dashed spinning box */}
+            <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full text-white/[0.15] group-hover:text-white/50 transition-colors duration-700 animate-[spin_12s_linear_infinite]">
+              <rect x="4" y="4" width="92" height="92" fill="none" stroke="currentColor" strokeWidth="2" strokeDasharray="12 6" />
+            </svg>
+            
+            {/* Inner solid counter-spinning box */}
+            <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full text-white/[0.05] group-hover:text-white/30 transition-colors duration-700 animate-[spin_16s_linear_infinite_reverse]">
+              <rect x="18" y="18" width="64" height="64" fill="none" stroke="currentColor" strokeWidth="1" transform="rotate(45 50 50)" />
+            </svg>
+
+            {/* Core Box */}
+            <div className="relative z-10 w-7 h-7 bg-[#080808] border border-white/20 group-hover:border-white group-hover:bg-white transition-all duration-500 flex items-center justify-center overflow-hidden rounded-sm">
+               <div className="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.5)_50%)] bg-[size:100%_2px] z-0 pointer-events-none opacity-50 group-hover:opacity-0" />
+               <span className="font-display font-bold text-white text-[10px] tracking-tighter relative z-10 group-hover:text-[#080808] transition-colors duration-500">NM</span>
+            </div>
+            
+            {/* Ping Tracker */}
+            <span className="absolute top-0 right-0 flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-white/50 group-hover:bg-white transition-colors"></span>
+            </span>
           </div>
+
           <div className="hidden sm:flex flex-col leading-none">
-            <span className="font-display font-semibold text-white text-sm tracking-widest uppercase group-hover:text-mono-200 transition-colors duration-300">
+            <span className="font-display font-semibold text-white text-sm tracking-[0.2em] uppercase transition-colors duration-300 relative">
               Nikhil Madaravena
+              {/* Glitch reflection layer on hover */}
+              <span className="absolute inset-0 opacity-0 group-hover:opacity-100 group-hover:-translate-x-[1px] group-hover:translate-y-[1px] text-white/30 mix-blend-screen transition-all duration-300 pointer-events-none" aria-hidden="true">
+                Nikhil Madaravena
+              </span>
             </span>
-            <span className="font-mono text-[9px] text-mono-600 tracking-[0.25em] uppercase mt-0.5">
-              Full-Stack · Systems Engineer
-            </span>
+            <div className="flex items-center gap-2 mt-1.5">
+              <div className="w-3 h-[1px] bg-white/20 group-hover:bg-white/50 group-hover:w-5 transition-all duration-500" />
+              <span className="font-mono text-[9px] text-mono-500 tracking-[0.3em] uppercase group-hover:text-mono-300 transition-colors duration-500">
+                Systems // Architect
+              </span>
+            </div>
           </div>
         </a>
 
