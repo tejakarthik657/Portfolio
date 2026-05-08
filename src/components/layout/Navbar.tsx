@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { Menu, X, FileText, Download } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import gsap from 'gsap';
@@ -72,8 +73,9 @@ const Navbar: React.FC = () => {
   }, []);
 
   return (
-    <nav
-      ref={navRef}
+    <>
+      <nav
+        ref={navRef}
       style={{ opacity: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
@@ -193,75 +195,78 @@ const Navbar: React.FC = () => {
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* CV Modal Popup */}
-      <AnimatePresence>
-        {isCvModalOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 md:p-12"
-          >
-            {/* Backdrop */}
-            <div 
-              className="absolute inset-0 bg-[#080808]/90 backdrop-blur-xl" 
-              onClick={() => setIsCvModalOpen(false)}
-            />
-            
-            {/* Modal Container */}
-            <motion.div
-              initial={{ scale: 0.95, opacity: 0, y: 20 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.95, opacity: 0, y: 20 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-5xl h-full max-h-[85vh] bg-[#050505] border border-white/10 rounded-sm shadow-2xl flex flex-col overflow-hidden"
-            >
-              {/* Corner Brackets */}
-              <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-white/20 -translate-x-1 -translate-y-1 pointer-events-none z-20" />
-              <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-white/20 translate-x-1 translate-y-1 pointer-events-none z-20" />
-
-              {/* Header */}
-              <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-[#080808] relative z-20">
-                <div className="flex items-center gap-4">
-                  <FileText size={16} className="text-mono-500" />
-                  <h3 className="font-mono text-xs text-white tracking-[0.2em] uppercase">System_Profile // CV</h3>
-                </div>
-                <div className="flex items-center gap-4">
-                  <a
-                    href={cvUrl}
-                    download="Nikhil_Madaravena_CV.pdf"
-                    className="flex items-center gap-2 px-4 py-2 border border-white/20 hover:border-white/50 text-white hover:bg-white hover:text-black transition-all duration-300 text-[10px] font-mono tracking-widest uppercase rounded-sm group"
-                  >
-                    <Download size={14} className="group-hover:-translate-y-0.5 transition-transform" />
-                    Download
-                  </a>
-                  <button
-                    onClick={() => setIsCvModalOpen(false)}
-                    className="p-2 text-mono-400 hover:text-white transition-colors border border-transparent hover:border-white/20 rounded-sm"
-                  >
-                    <X size={18} />
-                  </button>
-                </div>
-              </div>
-
-              {/* PDF Viewer */}
-              <div className="flex-1 w-full bg-[#0a0a0a] relative p-1 lg:p-4">
-                <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
-                <iframe
-                  src={`${cvUrl}#toolbar=0&navpanes=0&scrollbar=0`}
-                  className="w-full h-full border-none relative z-10 rounded-sm bg-white"
-                  title="CV Viewer"
-                />
-              </div>
-              
-              {/* Footer Bar */}
-              <div className="h-1 bg-gradient-to-r from-transparent via-white/20 to-transparent relative z-20" />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </nav>
+      {/* CV Modal Popup */}
+      {typeof document !== 'undefined' && createPortal(
+        <AnimatePresence>
+          {isCvModalOpen && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 md:p-12"
+            >
+              {/* Backdrop */}
+              <div 
+                className="absolute inset-0 bg-[#080808]/90 backdrop-blur-xl" 
+                onClick={() => setIsCvModalOpen(false)}
+              />
+              
+              {/* Modal Container */}
+              <motion.div
+                initial={{ scale: 0.95, opacity: 0, y: 20 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                exit={{ scale: 0.95, opacity: 0, y: 20 }}
+                transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                className="relative w-full max-w-5xl h-full max-h-[85vh] bg-[#050505] border border-white/10 rounded-sm shadow-2xl flex flex-col overflow-hidden"
+              >
+                {/* Corner Brackets */}
+                <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-white/20 -translate-x-1 -translate-y-1 pointer-events-none z-20" />
+                <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-white/20 translate-x-1 translate-y-1 pointer-events-none z-20" />
+
+                {/* Header */}
+                <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-[#080808] relative z-20">
+                  <div className="flex items-center gap-4">
+                    <FileText size={16} className="text-mono-500" />
+                    <h3 className="font-mono text-xs text-white tracking-[0.2em] uppercase">System_Profile // CV</h3>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <a
+                      href={cvUrl}
+                      download="Nikhil_Madaravena_CV.pdf"
+                      className="flex items-center gap-2 px-4 py-2 border border-white/20 hover:border-white/50 text-white hover:bg-white hover:text-black transition-all duration-300 text-[10px] font-mono tracking-widest uppercase rounded-sm group"
+                    >
+                      <Download size={14} className="group-hover:-translate-y-0.5 transition-transform" />
+                      Download
+                    </a>
+                    <button
+                      onClick={() => setIsCvModalOpen(false)}
+                      className="p-2 text-mono-400 hover:text-white transition-colors border border-transparent hover:border-white/20 rounded-sm"
+                    >
+                      <X size={18} />
+                    </button>
+                  </div>
+                </div>
+
+                {/* PDF Viewer */}
+                <div className="flex-1 w-full bg-[#0a0a0a] relative p-1 lg:p-4">
+                  <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
+                  <iframe
+                    src={`${cvUrl}#toolbar=0&navpanes=0&scrollbar=0`}
+                    className="w-full h-full border-none relative z-10 rounded-sm bg-white"
+                    title="CV Viewer"
+                  />
+                </div>
+                
+                {/* Footer Bar */}
+                <div className="h-1 bg-gradient-to-r from-transparent via-white/20 to-transparent relative z-20" />
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
+    </>
   );
 };
 
