@@ -85,44 +85,51 @@ const Navbar: React.FC = () => {
     >
       <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
         
-        {/* Advanced Architectural Logo */}
-        <a ref={logoRef} href="#home" onClick={() => setActiveLink('home')} className="flex items-center gap-5 group">
-          <div className="relative w-11 h-11 flex items-center justify-center shrink-0">
-            {/* Outer dashed spinning box */}
-            <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full text-white/[0.15] group-hover:text-white/50 transition-colors duration-700 animate-[spin_12s_linear_infinite]">
-              <rect x="4" y="4" width="92" height="92" fill="none" stroke="currentColor" strokeWidth="2" strokeDasharray="12 6" />
-            </svg>
-            
-            {/* Inner solid counter-spinning box */}
-            <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full text-white/[0.05] group-hover:text-white/30 transition-colors duration-700 animate-[spin_16s_linear_infinite_reverse]">
-              <rect x="18" y="18" width="64" height="64" fill="none" stroke="currentColor" strokeWidth="1" transform="rotate(45 50 50)" />
-            </svg>
-
-            {/* Core Box */}
-            <div className="relative z-10 w-7 h-7 bg-[#080808] border border-white/20 group-hover:border-white group-hover:bg-white transition-all duration-500 flex items-center justify-center overflow-hidden rounded-sm">
-               <div className="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.5)_50%)] bg-[size:100%_2px] z-0 pointer-events-none opacity-50 group-hover:opacity-0" />
-               <span className="font-display font-bold text-white text-[10px] tracking-tighter relative z-10 group-hover:text-[#080808] transition-colors duration-500">NM</span>
+        {/* Schematic Architectural Logo */}
+        <a ref={logoRef} href="#home" onClick={() => setActiveLink('home')} className="flex items-center gap-6 group">
+          
+          <div className="relative flex items-center justify-center w-10 h-10">
+            {/* The Core Box */}
+            <div className="relative z-10 w-full h-full border border-white/20 group-hover:border-white/50 bg-[#050505] transition-colors duration-500 flex flex-col justify-between p-1.5 overflow-hidden">
+              
+              {/* Internal Scanline */}
+              <div className="absolute inset-0 bg-white/[0.03] -translate-y-full group-hover:translate-y-full transition-transform duration-[1.5s] ease-in-out" />
+              
+              {/* Top Row */}
+              <div className="flex justify-between items-start w-full relative z-10">
+                <span className="font-mono text-[10px] font-bold leading-none text-white tracking-widest">N</span>
+                <div className="flex gap-0.5">
+                  <div className="w-1 h-1 bg-white/20 group-hover:bg-white transition-colors duration-500 delay-100" />
+                  <div className="w-1 h-1 bg-white/20 group-hover:bg-white transition-colors duration-500 delay-200" />
+                </div>
+              </div>
+              
+              {/* Bottom Row */}
+              <div className="flex justify-between items-end w-full relative z-10">
+                <div className="flex flex-col gap-0.5 w-full pr-3 pb-0.5">
+                  <div className="w-full h-px bg-white/20 group-hover:bg-white/50 scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 delay-100" />
+                  <div className="w-2/3 h-px bg-white/20 group-hover:bg-white/50 scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 delay-200" />
+                </div>
+                <span className="font-mono text-[10px] font-bold leading-none text-white tracking-widest">M</span>
+              </div>
+              
+              {/* Targeting Reticle Corners */}
+              <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </div>
-            
-            {/* Ping Tracker */}
-            <span className="absolute top-0 right-0 flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-white/50 group-hover:bg-white transition-colors"></span>
-            </span>
+
+            {/* Surrounding Frame (Expands on hover) */}
+            <div className="absolute inset-[-5px] border border-white/5 opacity-0 group-hover:opacity-100 scale-95 group-hover:scale-100 transition-all duration-500 pointer-events-none" />
           </div>
 
-          <div className="hidden sm:flex flex-col leading-none">
-            <span className="font-display font-semibold text-white text-sm tracking-[0.2em] uppercase transition-colors duration-300 relative">
+          <div className="hidden sm:flex flex-col justify-center gap-1.5">
+            <span className="font-display font-bold text-white text-sm tracking-[0.2em] uppercase transition-all duration-500 group-hover:tracking-[0.25em]">
               Nikhil Madaravena
-              {/* Glitch reflection layer on hover */}
-              <span className="absolute inset-0 opacity-0 group-hover:opacity-100 group-hover:-translate-x-[1px] group-hover:translate-y-[1px] text-white/30 mix-blend-screen transition-all duration-300 pointer-events-none" aria-hidden="true">
-                Nikhil Madaravena
-              </span>
             </span>
-            <div className="flex items-center gap-2 mt-1.5">
-              <div className="w-3 h-[1px] bg-white/20 group-hover:bg-white/50 group-hover:w-5 transition-all duration-500" />
-              <span className="font-mono text-[9px] text-mono-500 tracking-[0.3em] uppercase group-hover:text-mono-300 transition-colors duration-500">
-                Systems // Architect
+            <div className="flex items-center gap-3">
+              <div className="h-px bg-white/20 w-6 group-hover:w-12 transition-all duration-500" />
+              <span className="font-mono text-[9px] text-mono-500 tracking-[0.3em] uppercase leading-none group-hover:text-white transition-colors duration-500">
+                System_Node // 01
               </span>
             </div>
           </div>
