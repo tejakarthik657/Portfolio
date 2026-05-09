@@ -38,15 +38,20 @@ const Contact: React.FC = () => {
 
   const contactInfo = [
     { icon: <MapPin className="w-4 h-4" />, title: 'Location',  value: 'Telangana, India' },
-    { icon: <Phone className="w-4 h-4" />,  title: 'Phone',     value: '+91 7989938520' },
-    { icon: <Mail className="w-4 h-4" />,   title: 'Email',     value: 'nikhil.madaravena@gmail.com' },
+    { icon: <Phone className="w-4 h-4" />,  title: 'Phone',     value: '+91 76739 23505' },
+    { icon: <Mail className="w-4 h-4" />,   title: 'Email',     value: 'teja.karthik.5505@gmail.com' },
     { icon: <FaGithub className="w-4 h-4" />, title: 'GitHub', value: (
-        <a href="https://github.com/nikhil-madaravena" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
-          github.com/nikhil-madaravena
+        <a href="https://github.com/tejakarthik657" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+          github.com/tejakarthik657
         </a>
       )
     },
-    { icon: <FaDiscord className="w-4 h-4" />, title: 'Discord', value: 'nyx.enigmatic' },
+    { icon: <FaDiscord className="w-4 h-4" />, title: 'LinkedIn', value: (
+        <a href="https://www.linkedin.com/in/karthik-kona-dev/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+          linkedin.com/in/karthik-kona-dev
+        </a>
+      )
+    },
   ];
 
   const containerVariants = {
@@ -60,7 +65,7 @@ const Contact: React.FC = () => {
   };
 
   const inputClass = (hasError: boolean) =>
-    `w-full px-4 py-3 bg-transparent border rounded-sm text-white placeholder-mono-700 text-sm font-sans focus:outline-none transition-all duration-300 ${
+    `w-full px-4 py-3 bg-[#050505] border rounded-sm text-white placeholder-mono-700 text-sm font-mono tracking-wide focus:outline-none transition-all duration-500 focus:shadow-[inset_0_0_20px_rgba(255,255,255,0.03)] ${
       hasError
         ? 'border-red-500/50 focus:border-red-500'
         : 'border-white/10 focus:border-white/40'
@@ -181,37 +186,36 @@ const Contact: React.FC = () => {
                 <motion.button
                   type="submit"
                   disabled={formStatus === 'submitting'}
-                  className={`w-full flex items-center justify-center gap-3 px-6 py-4 text-sm font-semibold rounded-sm tracking-wider uppercase transition-all duration-300 ${
+                  className={`w-full flex items-center justify-center gap-3 px-6 py-4 text-sm font-semibold rounded-sm tracking-wider uppercase transition-all duration-300 relative overflow-hidden group ${
                     formStatus === 'success'
-                      ? 'bg-green-500/20 border border-green-500/40 text-green-400'
+                      ? 'bg-[#050505] border border-green-500/40 text-green-400'
                       : formStatus === 'error'
-                      ? 'bg-red-500/20 border border-red-500/40 text-red-400'
+                      ? 'bg-[#050505] border border-red-500/40 text-red-400'
                       : 'bg-white text-[#080808] hover:bg-mono-200'
                   }`}
                   whileHover={{ scale: formStatus === 'submitting' ? 1 : 1.02 }}
                   whileTap={{ scale: formStatus === 'submitting' ? 1 : 0.98 }}
                 >
                   {formStatus === 'submitting' ? (
-                    <>
-                      <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                      </svg>
-                      Sending...
-                    </>
+                    <span className="font-mono text-xs tracking-widest uppercase animate-pulse text-mono-400 flex items-center gap-2">
+                      <span className="w-2 h-2 bg-mono-400 animate-ping rounded-full" />
+                      [SYS] Transmitting packets...
+                    </span>
                   ) : formStatus === 'success' ? (
-                    <>
-                      <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                      </svg>
-                      Message Sent!
-                    </>
+                    <span className="font-mono text-xs tracking-widest uppercase text-green-400">
+                      [OK] Transmission Successful
+                    </span>
                   ) : formStatus === 'error' ? (
-                    'Failed to Send. Try again.'
+                    <span className="font-mono text-xs tracking-widest uppercase text-red-400">
+                      [ERR] Transmission Failed
+                    </span>
                   ) : (
                     <>
-                      <SendHorizonal className="h-4 w-4" />
-                      Send Message
+                      <div className="absolute inset-0 bg-mono-200 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
+                      <span className="relative z-10 flex items-center gap-3 group-hover:animate-glitch-anim">
+                        <SendHorizonal className="h-4 w-4" />
+                        <span className="font-mono text-[10px] tracking-[0.25em] uppercase">Initialize Transmission</span>
+                      </span>
                     </>
                   )}
                 </motion.button>

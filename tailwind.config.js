@@ -88,6 +88,25 @@ export default {
         'glow-pulse': { '0%, 100%': { boxShadow: '0 0 20px rgba(255,255,255,0.05)' }, '50%': { boxShadow: '0 0 40px rgba(255,255,255,0.12)' } },
         'scan':       { '0%': { backgroundPosition: '0 0' }, '100%': { backgroundPosition: '0 100%' } },
         'float':      { '0%, 100%': { transform: 'translateY(0px)' }, '50%': { transform: 'translateY(-8px)' } },
+        'glitch-anim': {
+          '0%, 100%': { transform: 'translate(0)' },
+          '20%': { transform: 'translate(-2px, 2px)' },
+          '40%': { transform: 'translate(-2px, -2px)' },
+          '60%': { transform: 'translate(2px, 2px)' },
+          '80%': { transform: 'translate(2px, -2px)' },
+        },
+        'glitch-skew': {
+          '0%, 100%': { transform: 'skew(0deg)' },
+          '10%': { transform: 'skew(-10deg)' },
+          '20%': { transform: 'skew(10deg)' },
+          '30%': { transform: 'skew(0deg)' },
+        },
+        'laser-scan': {
+          '0%': { transform: 'translateY(-100px)', opacity: '0' },
+          '10%': { opacity: '1' },
+          '90%': { opacity: '1' },
+          '100%': { transform: 'translateY(300px)', opacity: '0' },
+        }
       },
       animation: {
         'fade-in':    'fade-in 0.5s ease-in-out',
@@ -97,6 +116,9 @@ export default {
         'blink':      'blink 1.2s step-end infinite',
         'glow-pulse': 'glow-pulse 3s ease-in-out infinite',
         'float':      'float 4s ease-in-out infinite',
+        'glitch-anim': 'glitch-anim 0.4s ease-in-out infinite',
+        'glitch-skew': 'glitch-skew 0.3s ease-in-out infinite',
+        'laser-scan': 'laser-scan 2.5s ease-in-out infinite',
       },
       backgroundImage: {
         'grid-pattern': "linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)",

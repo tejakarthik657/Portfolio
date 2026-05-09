@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { projects } from '../../data/projects';
 import { ArrowUpRight, Github } from 'lucide-react';
+import DataStream from '../ui/DataStream';
 
 // Infinite marquee ticker for tech stack
 const TechTicker = ({ items }: { items: string[] }) => {
@@ -75,15 +76,18 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: n
           <div className={`flex flex-col md:flex-row ${isEven ? '' : 'md:flex-row-reverse'} border-b border-white/[0.05]`}>
 
             {/* Mini acronym graphic panel */}
-            <div className="md:w-2/5 relative min-h-[180px] flex items-center justify-center overflow-hidden border-b md:border-b-0 border-white/[0.05] md:border-r border-white/[0.05] bg-[#080808]">
+            <div className="md:w-2/5 relative min-h-[180px] flex items-center justify-center overflow-hidden border-b md:border-b-0 border-white/[0.05] md:border-r border-white/[0.05] bg-[#080808] group/panel">
               <motion.span
                 style={{ y: acronymY }}
-                className="font-display font-bold text-[120px] text-transparent [-webkit-text-stroke:1px_rgba(255,255,255,0.06)] select-none pointer-events-none tracking-tighter"
+                className="font-display font-bold text-[120px] text-transparent [-webkit-text-stroke:1px_rgba(255,255,255,0.06)] select-none pointer-events-none tracking-tighter transition-all duration-700 group-hover/panel:[-webkit-text-stroke:2px_rgba(255,255,255,0.3)] group-hover/panel:animate-glitch-skew"
               >
                 {acronym}
               </motion.span>
               {/* Architectural grid overlay */}
-              <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_70%_70%_at_50%_50%,#000_20%,transparent_100%)]" />
+              <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_70%_70%_at_50%_50%,#000_20%,transparent_100%)] transition-opacity duration-500 group-hover/panel:opacity-50" />
+              
+              {/* Scanline laser */}
+              <div className="absolute top-0 left-0 right-0 h-0.5 bg-white/70 shadow-[0_0_20px_rgba(255,255,255,0.9)] -translate-y-[100px] group-hover/panel:animate-laser-scan opacity-0 group-hover/panel:opacity-100 transition-opacity duration-300" />
             </div>
 
             {/* Description panel */}
@@ -170,6 +174,7 @@ const Projects: React.FC = () => {
 
   return (
     <section id="projects" className="py-32 bg-[#080808] relative overflow-hidden">
+      <DataStream />
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">

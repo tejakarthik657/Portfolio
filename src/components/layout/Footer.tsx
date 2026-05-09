@@ -6,12 +6,12 @@ const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
-    { name: 'GitHub',   icon: <Github size={16} />,   url: 'https://github.com/Nikhil-Madaravena' },
-    { name: 'LinkedIn', icon: <Linkedin size={16} />, url: 'https://www.linkedin.com/in/nikhil-madaravena' },
-    { name: 'Email',    icon: <Mail size={16} />,     url: 'mailto:nikhil.madaravena@gmail.com' },
+    { name: 'GitHub',   icon: <Github size={16} />,   url: 'https://github.com/tejakarthik657' },
+    { name: 'LinkedIn', icon: <Linkedin size={16} />, url: 'https://www.linkedin.com/in/karthik-kona-dev/' },
+    { name: 'Email',    icon: <Mail size={16} />,     url: 'mailto:teja.karthik.5505@gmail.com' },
   ];
 
-  const navLinks = ['Home', 'About', 'Projects', 'Experience', 'Contact'];
+  const navLinks = ['Home', 'About', 'Experience', 'Projects', 'Contact'];
 
   return (
     <footer className="bg-[#0d0d0e] border-t border-white/[0.06] pt-16 pb-8 px-6">
@@ -56,20 +56,20 @@ const Footer: React.FC = () => {
               </div>
 
               <div className="flex flex-col justify-center gap-1">
-                <span className="font-display font-bold text-white text-xs tracking-[0.2em] uppercase transition-all duration-500 group-hover:tracking-[0.25em]">
-                  Nikhil Madaravena
+                  <span className="font-display font-bold text-white text-xs tracking-[0.2em] uppercase transition-all duration-500 group-hover:tracking-[0.25em]">
+                    Teja Karthik
                 </span>
                 <div className="flex items-center gap-2">
                   <div className="h-px bg-white/20 w-4 group-hover:w-8 transition-all duration-500" />
                   <span className="font-mono text-[8px] text-mono-500 tracking-[0.3em] uppercase leading-none group-hover:text-white transition-colors duration-500">
-                    System_Node // 01
+                      Full_Stack_Node // 01
                   </span>
                 </div>
               </div>
             </div>
             <p className="text-xs text-mono-600 leading-relaxed font-mono">
-              Full-Stack Developer & Systems Engineer.<br />
-              Building precision-crafted digital experiences.
+                Full-Stack Developer focused on backend engineering, secure web systems, and AI-assisted workflows.<br />
+                Building clean, modern digital experiences with purpose.
             </p>
           </div>
 
@@ -125,10 +125,10 @@ const Footer: React.FC = () => {
         {/* Bottom divider + copyright */}
         <div className="border-t border-white/[0.06] pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-mono-700 font-mono">
-            © {currentYear} Nikhil Madaravena. All rights reserved.
+            © {currentYear} Teja Karthik. All rights reserved.
           </p>
           <p className="text-xs text-mono-700 font-mono">
-            Built with React · Three.js · Framer Motion
+            Built with React · TypeScript · Framer Motion
           </p>
         </div>
       </div>

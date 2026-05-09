@@ -2,6 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import { Github, Linkedin, Mail, ArrowUpRight } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Core3D from '../ui/Core3D';
+import Magnetic from '../ui/Magnetic';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -24,12 +26,24 @@ const Hero: React.FC = () => {
   const tickerRef    = useRef<HTMLDivElement>(null);
   const bracketsTLRef = useRef<HTMLDivElement>(null);
   const bracketsBRRef = useRef<HTMLDivElement>(null);
+  const [mousePos, setMousePos] = React.useState({ x: 0, y: 0 });
 
   const socialLinks = [
-    { name: 'GitHub',   icon: <Github size={14} />,   url: 'https://github.com/Nikhil-Madaravena' },
-    { name: 'LinkedIn', icon: <Linkedin size={14} />, url: 'https://www.linkedin.com/in/nikhil-madaravena' },
-    { name: 'Email',    icon: <Mail size={14} />,     url: 'mailto:nikhil.madaravena@gmail.com' },
+    { name: 'GitHub',   icon: <Github size={14} />,   url: 'https://github.com/tejakarthik657' },
+    { name: 'LinkedIn', icon: <Linkedin size={14} />, url: 'https://www.linkedin.com/in/karthik-kona-dev/' },
+    { name: 'Email',    icon: <Mail size={14} />,     url: 'mailto:teja.karthik.5505@gmail.com' },
   ];
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const { innerWidth, innerHeight } = window;
+      const x = (e.clientX / innerWidth - 0.5) * 20;
+      const y = (e.clientY / innerHeight - 0.5) * 20;
+      setMousePos({ x, y });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -89,9 +103,9 @@ const Hero: React.FC = () => {
   }, []);
 
   const tickerItems = [
-    'Full-Stack Developer', '·', 'Systems Engineer', '·',
-    'Rust', '·', 'React.js', '·', 'Spring Boot', '·', 'Three.js', '·',
-    'PostgreSQL', '·', 'TypeScript', '·', 'Node.js', '·',
+    'Backend Engineering', '·', 'Real-Time Systems', '·',
+    'AI Integration', '·', 'System Architecture', '·', 'Product Engineering', '·',
+    'Node.js', '·', 'React.js', '·', 'MongoDB', '·', 'TypeScript', '·',
   ];
 
   return (
@@ -100,9 +114,13 @@ const Hero: React.FC = () => {
       id="home"
       className="relative min-h-screen flex flex-col bg-[#080808] overflow-hidden"
     >
-      {/* ── Architectural Grid ── */}
+      {/* ── Architectural Grid & 3D Core ── */}
       <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.025)_1px,transparent_1px)] bg-[size:60px_60px]" />
+        <div 
+          className="absolute inset-[-5%] transition-transform duration-700 ease-out bg-[linear-gradient(rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.025)_1px,transparent_1px)] bg-[size:60px_60px]" 
+          style={{ transform: `translate(${mousePos.x}px, ${mousePos.y}px)` }}
+        />
+        <Core3D />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_90%_70%_at_50%_50%,transparent_40%,#080808_100%)]" />
       </div>
 
@@ -139,19 +157,19 @@ const Hero: React.FC = () => {
 
           {/* Headline — letter-by-letter animated (Full Width) */}
           <div ref={headlineRef} className="leading-none mb-16 relative">
-            <h1 className="font-display font-bold tracking-tighter uppercase leading-[0.85]">
-              {/* NIKHIL — solid white */}
+            <h1 className="font-display font-bold tracking-[-0.05em] uppercase leading-[0.85] hover:tracking-[-0.03em] transition-all duration-700">
+              {/* TEJA — solid white */}
               <div style={{ clipPath: 'inset(-20% -20% 0 -20%)' }}>
                 <SplitLetters
-                  text="Nikhil"
+                  text="Teja"
                   className="text-[clamp(3.5rem,10vw,7rem)] text-white whitespace-nowrap"
                 />
               </div>
-              {/* MADARAVENA — hollow outline, fills on hover */}
-              <div style={{ clipPath: 'inset(-20% -20% 0 -20%)' }}>
+              {/* KARTHIK — hollow outline, fills on hover */}
+              <div style={{ clipPath: 'inset(-20% -20% 0 -20%)' }} className="group/hollow">
                 <SplitLetters
-                  text="Madaravena"
-                  className="text-[clamp(3.5rem,10vw,7rem)] hollow-name cursor-default whitespace-nowrap"
+                  text="Karthik"
+                  className="text-[clamp(3.5rem,10vw,7rem)] hollow-name cursor-default whitespace-nowrap group-hover/hollow:animate-glitch-skew"
                 />
               </div>
             </h1>
@@ -164,7 +182,7 @@ const Hero: React.FC = () => {
             <div className="lg:col-span-7 flex flex-col sm:flex-row sm:items-center gap-6">
               <div className="w-12 h-px bg-white/30 shrink-0 hidden sm:block" />
               <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
-                {['Full-Stack Developer', 'Systems Engineer', 'Rust · React · Java'].map((label) => (
+                {['Full-Stack Developer', 'Backend-Focused', 'AI Workflows'].map((label) => (
                   <span key={label} className="font-mono text-[10px] text-mono-500 tracking-[0.25em] uppercase border border-white/[0.05] bg-white/[0.01] px-3 py-1.5 rounded-sm">{label}</span>
                 ))}
               </div>
@@ -177,24 +195,26 @@ const Hero: React.FC = () => {
               className="lg:col-span-5 flex flex-col gap-6 lg:pl-10 lg:border-l border-white/[0.06]"
             >
               <p className="font-mono text-xs text-mono-500 leading-relaxed">
-                Engineering production-scale systems — from{' '}
-                <span className="text-white">Rust in-memory databases</span>{' '}
-                to <span className="text-white">60fps 3D interfaces</span>.
+                Building scalable full-stack systems with{' '}
+                <span className="text-white">backend-first architecture</span>,{' '}
+                <span className="text-white">AI-assisted workflows</span>, and{' '}
+                <span className="text-white">real-world product thinking</span>.
               </p>
               
               {/* Social links row */}
               <div className="flex items-center gap-4">
                 {socialLinks.map(link => (
-                  <a
-                    key={link.name}
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-mono-500 hover:text-white transition-colors duration-300 group px-3 py-2 border border-white/[0.05] hover:border-white/20 hover:bg-white/[0.02] rounded-sm"
-                  >
-                    {link.icon}
-                    <span className="font-mono text-[9px] tracking-widest uppercase">{link.name}</span>
-                  </a>
+                  <Magnetic key={link.name}>
+                    <a
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-mono-500 hover:text-white transition-colors duration-300 group px-3 py-2 border border-white/[0.05] hover:border-white/20 hover:bg-white/[0.02] rounded-sm"
+                    >
+                      {link.icon}
+                      <span className="font-mono text-[9px] tracking-widest uppercase">{link.name}</span>
+                    </a>
+                  </Magnetic>
                 ))}
               </div>
             </div>
@@ -209,19 +229,27 @@ const Hero: React.FC = () => {
           className="max-w-6xl mx-auto w-full px-6 py-14 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 border-t border-white/[0.05]"
         >
           <div className="flex items-center gap-4">
-            <a
-              href="#contact"
-              className="flex items-center gap-3 px-7 py-3.5 bg-white text-[#080808] text-[10px] font-mono tracking-[0.25em] uppercase hover:bg-mono-100 transition-colors duration-300"
-            >
-              Hire Me
-              <ArrowUpRight size={14} />
-            </a>
-            <a
-              href="#projects"
-              className="flex items-center gap-3 px-7 py-3.5 border border-white/20 text-white text-[10px] font-mono tracking-[0.25em] uppercase hover:border-white/50 hover:bg-white/[0.03] transition-all duration-300"
-            >
-              View Work
-            </a>
+            <Magnetic>
+              <a
+                href="#contact"
+                className="group relative overflow-hidden flex items-center gap-3 px-7 py-3.5 bg-white text-[#080808] text-[10px] font-mono tracking-[0.25em] uppercase hover:bg-mono-100 transition-all duration-300"
+              >
+                <div className="absolute inset-0 bg-mono-200 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
+                <span className="relative z-10 flex items-center gap-3 group-hover:animate-glitch-anim">
+                  Hire Me
+                  <ArrowUpRight size={14} className="group-hover:rotate-45 transition-transform duration-300" />
+                </span>
+              </a>
+            </Magnetic>
+            <Magnetic>
+              <a
+                href="#projects"
+                className="group relative flex items-center gap-3 px-7 py-3.5 border border-white/20 text-white text-[10px] font-mono tracking-[0.25em] uppercase hover:border-white/50 hover:bg-white/[0.03] transition-all duration-300 overflow-hidden"
+              >
+                <div className="absolute inset-0 bg-white/10 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out" />
+                <span className="relative z-10">View Work</span>
+              </a>
+            </Magnetic>
           </div>
 
           {/* Page index + scroll indicator */}

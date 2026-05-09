@@ -53,23 +53,23 @@ const About: React.FC = () => {
                   <div className="w-12 h-px bg-white" />
                   <h2 className="font-display font-bold text-5xl sm:text-6xl text-white tracking-tighter leading-[1.1]">
                     Bridging <br/>
-                    <span className="text-mono-500">low-level</span><br/>
-                    architecture & <br/>
-                    <span className="text-gradient">high-level</span><br/>
-                    experiences.
+                    <span className="text-mono-500">backend engineering</span><br/>
+                    with <br/>
+                    <span className="text-gradient">AI-integrated</span><br/>
+                    applications.
                   </h2>
                 </div>
                 
                 <div className="mt-16 grid grid-cols-2 gap-8">
                   <div className="relative">
                     <div className="absolute -left-4 top-2 w-px h-12 bg-white/20" />
-                    <div className="text-4xl font-display font-bold text-white mb-2">O(1)</div>
-                    <div className="text-[10px] font-mono text-mono-500 uppercase tracking-widest leading-relaxed">Latency<br/>Obsession</div>
+                    <div className="text-4xl font-display font-bold text-white mb-2">RESTful</div>
+                    <div className="text-[10px] font-mono text-mono-500 uppercase tracking-widest leading-relaxed">API<br/>Design</div>
                   </div>
                   <div className="relative">
                     <div className="absolute -left-4 top-2 w-px h-12 bg-white/20" />
-                    <div className="text-4xl font-display font-bold text-white mb-2">60<span className="text-xl text-mono-500">fps</span></div>
-                    <div className="text-[10px] font-mono text-mono-500 uppercase tracking-widest leading-relaxed">Render<br/>Fidelity</div>
+                    <div className="text-4xl font-display font-bold text-white mb-2">Real<span className="text-xl text-mono-500">-Time</span></div>
+                    <div className="text-[10px] font-mono text-mono-500 uppercase tracking-widest leading-relaxed">System<br/>Design</div>
                   </div>
                 </div>
               </div>
@@ -81,7 +81,7 @@ const About: React.FC = () => {
               {/* Editorial Text Block */}
               <div>
                 <p className="text-xl sm:text-2xl text-mono-300 font-light leading-relaxed mb-8">
-                  I don't just write code; I <span className="text-white font-medium">engineer systems</span> from the ground up. Whether it's memory-safe concurrency in Rust or fluid 3D experiences in the browser, I obsess over the invisible details that make software truly exceptional.
+                  I don't just write code; I <span className="text-white font-medium">build systems</span> from the ground up. Whether it's scalable backend architectures, AI-integrated applications, or real-time workflows, I obsess over designing systems that solve real-world problems while maintaining clean, modular code.
                 </p>
                 
                 <div className="h-px w-full bg-white/[0.05] my-12" />
@@ -90,19 +90,19 @@ const About: React.FC = () => {
                   <div>
                     <h3 className="text-xs font-mono text-white tracking-widest uppercase mb-5 flex items-center gap-3">
                       <span className="w-1.5 h-1.5 bg-white rounded-sm" />
-                      Systems Engineering
+                      Backend & System Design
                     </h3>
                     <p className="text-sm text-mono-400 leading-relaxed">
-                      Deep expertise in building robust backends with Spring Boot, Node.js, and complex PostgreSQL architectures. I explore the absolute limits of performance by engineering custom in-memory databases with Rust and strict memory safety.
+                      Deep expertise in building scalable backends with Node.js, Express.js, NestJS, and Spring Boot. I design efficient APIs, optimize database queries, and architect real-time workflows using technologies like MongoDB, PostgreSQL, and Redis.
                     </p>
                   </div>
                   <div>
                     <h3 className="text-xs font-mono text-white tracking-widest uppercase mb-5 flex items-center gap-3">
                       <span className="w-1.5 h-1.5 bg-white rounded-sm" />
-                      Interface Architecture
+                      AI-Integrated Development
                     </h3>
                     <p className="text-sm text-mono-400 leading-relaxed">
-                      Translating complex data into immersive, interactive interfaces. I leverage React.js, Framer Motion, and Three.js to construct UIs that feel alive, prioritizing rendering performance, micro-interactions, and visual precision.
+                      Highly interested in AI-assisted workflows and intelligent applications. I leverage LangChain, LlamaIndex, RAG systems, and modern LLM APIs to build practical AI-powered features that enhance user experiences and developer productivity.
                     </p>
                   </div>
                 </div>
@@ -112,7 +112,7 @@ const About: React.FC = () => {
               <div className="mt-4 pt-10 border-t border-white/[0.05]">
                 <p className="text-[10px] font-mono text-mono-600 tracking-widest uppercase mb-5">Core Arsenal</p>
                 <div className="flex flex-wrap gap-2.5">
-                  {['Rust', 'Java', 'Spring Boot', 'React.js', 'PostgreSQL', 'Three.js', 'TypeScript', 'Node.js'].map((tag) => (
+                  {['Node.js', 'React.js', 'TypeScript', 'MongoDB', 'PostgreSQL', 'NestJS', 'LangChain', 'RAG'].map((tag) => (
                     <span key={tag} className="px-4 py-2 border border-white/10 text-[11px] font-mono text-mono-300 tracking-widest uppercase rounded-sm hover:bg-white hover:text-[#080808] transition-colors duration-300 cursor-default">
                       {tag}
                     </span>

@@ -3,7 +3,8 @@ import { createPortal } from 'react-dom';
 import { Menu, X, FileText, Download } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import gsap from 'gsap';
-import cvUrl from '../../assets/CV.pdf';
+import cvUrl from '../../assets/FAANGPath_Simple_Template (1).pdf';
+import Magnetic from '../ui/Magnetic';
 
 const navLinks = [
   { name: 'Home',     href: '#home',     id: 'home' },
@@ -76,8 +77,7 @@ const Navbar: React.FC = () => {
     <>
       <nav
         ref={navRef}
-      style={{ opacity: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-50 opacity-0 transition-all duration-500 ${
         isScrolled
           ? 'bg-[rgba(8,8,8,0.92)] backdrop-blur-xl border-b border-white/[0.06] py-3'
           : 'bg-transparent py-5'
@@ -97,7 +97,7 @@ const Navbar: React.FC = () => {
               
               {/* Top Row */}
               <div className="flex justify-between items-start w-full relative z-10">
-                <span className="font-mono text-[10px] font-bold leading-none text-white tracking-widest">N</span>
+                <span className="font-mono text-[10px] font-bold leading-none text-white tracking-widest">T</span>
                 <div className="flex gap-0.5">
                   <div className="w-1 h-1 bg-white/20 group-hover:bg-white transition-colors duration-500 delay-100" />
                   <div className="w-1 h-1 bg-white/20 group-hover:bg-white transition-colors duration-500 delay-200" />
@@ -110,7 +110,7 @@ const Navbar: React.FC = () => {
                   <div className="w-full h-px bg-white/20 group-hover:bg-white/50 scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 delay-100" />
                   <div className="w-2/3 h-px bg-white/20 group-hover:bg-white/50 scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 delay-200" />
                 </div>
-                <span className="font-mono text-[10px] font-bold leading-none text-white tracking-widest">M</span>
+                <span className="font-mono text-[10px] font-bold leading-none text-white tracking-widest">K</span>
               </div>
               
               {/* Targeting Reticle Corners */}
@@ -124,12 +124,12 @@ const Navbar: React.FC = () => {
 
           <div className="hidden sm:flex flex-col justify-center gap-1.5">
             <span className="font-display font-bold text-white text-sm tracking-[0.2em] uppercase transition-all duration-500 group-hover:tracking-[0.25em]">
-              Nikhil Madaravena
+              Teja Karthik
             </span>
             <div className="flex items-center gap-3">
               <div className="h-px bg-white/20 w-6 group-hover:w-12 transition-all duration-500" />
               <span className="font-mono text-[9px] text-mono-500 tracking-[0.3em] uppercase leading-none group-hover:text-white transition-colors duration-500">
-                System_Node // 01
+                Backend_Node // 01
               </span>
             </div>
           </div>
@@ -138,20 +138,22 @@ const Navbar: React.FC = () => {
         {/* Desktop Links */}
         <ul ref={linksRef} className="hidden md:flex items-center gap-10">
           {navLinks.map((link) => (
-            <li key={link.id}>
-              <a
-                href={link.href}
-                onClick={() => setActiveLink(link.id)}
-                className={`relative text-[11px] font-mono tracking-[0.25em] uppercase transition-colors duration-300 pb-1 group ${
-                  activeLink === link.id ? 'text-white' : 'text-mono-500 hover:text-white'
-                }`}
-              >
-                {link.name}
-                <span className={`absolute bottom-0 left-0 h-px bg-white transition-all duration-400 ${
-                  activeLink === link.id ? 'w-full' : 'w-0 group-hover:w-full'
-                }`} />
-              </a>
-            </li>
+            <Magnetic key={link.id}>
+              <li>
+                <a
+                  href={link.href}
+                  onClick={() => setActiveLink(link.id)}
+                  className={`relative text-[11px] font-mono tracking-[0.25em] uppercase transition-colors duration-300 pb-1 group block ${
+                    activeLink === link.id ? 'text-white' : 'text-mono-500 hover:text-white'
+                  }`}
+                >
+                  {link.name}
+                  <span className={`absolute bottom-0 left-0 h-px bg-white transition-all duration-400 ${
+                    activeLink === link.id ? 'w-full' : 'w-0 group-hover:w-full'
+                  }`} />
+                </a>
+              </li>
+            </Magnetic>
           ))}
         </ul>
 
@@ -163,20 +165,22 @@ const Navbar: React.FC = () => {
             <span className="font-mono text-[10px] text-mono-600 tabular-nums tracking-widest">{currentTime}</span>
           </div>
           {/* CV Modal Trigger */}
-          <button 
-            ref={ctaRef}
-            onClick={() => setIsCvModalOpen(true)}
-            className="group relative flex items-center gap-2 bg-[#050505] border border-white/[0.15] hover:border-white/40 transition-all duration-500 shadow-[0_0_15px_rgba(0,0,0,0.5)] hover:shadow-[0_0_25px_rgba(255,255,255,0.05)] rounded-sm px-5 py-2.5"
-          >
-            <div className="absolute inset-0 bg-white/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-sm" />
-            
-            <FileText size={14} className="text-mono-500 group-hover:text-white transition-colors duration-300 relative z-10" />
-            <span className="relative z-10 text-white text-[10px] font-mono tracking-[0.2em] uppercase">Access_CV</span>
+          <Magnetic>
+            <button 
+              ref={ctaRef}
+              onClick={() => setIsCvModalOpen(true)}
+              className="group relative flex items-center gap-2 bg-[#050505] border border-white/[0.15] hover:border-white/40 transition-all duration-500 shadow-[0_0_15px_rgba(0,0,0,0.5)] hover:shadow-[0_0_25px_rgba(255,255,255,0.05)] rounded-sm px-5 py-2.5"
+            >
+              <div className="absolute inset-0 bg-white/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-sm" />
+              
+              <FileText size={14} className="text-mono-500 group-hover:text-white transition-colors duration-300 relative z-10" />
+              <span className="relative z-10 text-white text-[10px] font-mono tracking-[0.2em] uppercase">Access_CV</span>
 
-            {/* Corner Bracket acccents */}
-            <div className="absolute top-0 left-0 w-1.5 h-1.5 border-t border-l border-white/30 opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-x-0.5 -translate-y-0.5 group-hover:translate-x-0 group-hover:translate-y-0" />
-            <div className="absolute bottom-0 right-0 w-1.5 h-1.5 border-b border-r border-white/30 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-0.5 translate-y-0.5 group-hover:translate-x-0 group-hover:translate-y-0" />
-          </button>
+              {/* Corner Bracket acccents */}
+              <div className="absolute top-0 left-0 w-1.5 h-1.5 border-t border-l border-white/30 opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-x-0.5 -translate-y-0.5 group-hover:translate-x-0 group-hover:translate-y-0" />
+              <div className="absolute bottom-0 right-0 w-1.5 h-1.5 border-b border-r border-white/30 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-0.5 translate-y-0.5 group-hover:translate-x-0 group-hover:translate-y-0" />
+            </button>
+          </Magnetic>
         </div>
 
         {/* Mobile Hamburger */}
@@ -201,31 +205,31 @@ const Navbar: React.FC = () => {
           >
             <ul className="px-6 py-8 flex flex-col gap-6">
               {navLinks.map((link, i) => (
-                <motion.li
-                  key={link.id}
-                  initial={{ opacity: 0, x: -16 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.07, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  <a
+                <li key={link.id}>
+                  <motion.a
                     href={link.href}
+                    initial={{ opacity: 0, x: -16 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.07, ease: [0.16, 1, 0.3, 1] }}
                     className="flex items-center gap-4 text-mono-400 hover:text-white text-base font-mono tracking-widest uppercase transition-colors"
                     onClick={() => { setActiveLink(link.id); setIsMenuOpen(false); }}
                   >
                     <span className="text-[10px] text-mono-600">{String(i + 1).padStart(2, '0')}</span>
                     {link.name}
-                  </a>
-                </motion.li>
+                  </motion.a>
+                </li>
               ))}
-              <motion.li initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.32 }}>
-                <button
-                  className="group relative inline-flex items-center gap-3 bg-[#050505] border border-white/[0.15] hover:border-white/40 transition-all duration-500 shadow-[0_0_15px_rgba(0,0,0,0.5)] hover:shadow-[0_0_25px_rgba(255,255,255,0.05)] rounded-sm px-6 py-3.5"
-                  onClick={() => { setIsMenuOpen(false); setIsCvModalOpen(true); }}
-                >
-                  <FileText size={14} className="text-mono-500 group-hover:text-white transition-colors duration-300 relative z-10" />
-                  <span className="relative z-10 text-white text-[11px] font-mono tracking-[0.2em] uppercase">Access_CV</span>
-                </button>
-              </motion.li>
+              <li>
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.32 }}>
+                  <button
+                    className="group relative inline-flex items-center gap-3 bg-[#050505] border border-white/[0.15] hover:border-white/40 transition-all duration-500 shadow-[0_0_15px_rgba(0,0,0,0.5)] hover:shadow-[0_0_25px_rgba(255,255,255,0.05)] rounded-sm px-6 py-3.5"
+                    onClick={() => { setIsMenuOpen(false); setIsCvModalOpen(true); }}
+                  >
+                    <FileText size={14} className="text-mono-500 group-hover:text-white transition-colors duration-300 relative z-10" />
+                    <span className="relative z-10 text-white text-[11px] font-mono tracking-[0.2em] uppercase">Access_CV</span>
+                  </button>
+                </motion.div>
+              </li>
             </ul>
           </motion.div>
         )}
@@ -263,12 +267,12 @@ const Navbar: React.FC = () => {
                 <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-[#080808] relative z-20">
                   <div className="flex items-center gap-4">
                     <FileText size={16} className="text-mono-500" />
-                    <h3 className="font-mono text-xs text-white tracking-[0.2em] uppercase">System_Profile // CV</h3>
+                    <h3 className="font-mono text-xs text-white tracking-[0.2em] uppercase">Teja_Karthik // CV</h3>
                   </div>
                   <div className="flex items-center gap-4">
                     <a
                       href={cvUrl}
-                      download="Nikhil_Madaravena_CV.pdf"
+                      download="Teja_Karthik_CV.pdf"
                       className="flex items-center gap-2 px-4 py-2 border border-white/20 hover:border-white/50 text-white hover:bg-white hover:text-black transition-all duration-300 text-[10px] font-mono tracking-widest uppercase rounded-sm group"
                     >
                       <Download size={14} className="group-hover:-translate-y-0.5 transition-transform" />
@@ -276,10 +280,39 @@ const Navbar: React.FC = () => {
                     </a>
                     <button
                       onClick={() => setIsCvModalOpen(false)}
+                      aria-label="Close CV modal"
+                      title="Close CV modal"
                       className="p-2 text-mono-400 hover:text-white transition-colors border border-transparent hover:border-white/20 rounded-sm"
                     >
                       <X size={18} />
                     </button>
+                  </div>
+                </div>
+
+                {/* CV Snapshot */}
+                <div className="relative z-20 border-b border-white/10 bg-[#060606] px-6 py-5">
+                  <div className="grid gap-4 lg:grid-cols-2">
+                    <div className="rounded-sm border border-white/10 bg-white/[0.02] p-4">
+                      <p className="font-mono text-[10px] text-mono-500 tracking-[0.28em] uppercase mb-3">Internship Overview</p>
+                      <div className="space-y-2 text-sm text-white/85 leading-relaxed">
+                        <p><span className="text-white">SVAPSS</span> — Digital Marketing, Web Development & Video Editing</p>
+                        <p><span className="text-white">Edu Tantr</span> — Web & Security Perspective</p>
+                        <p><span className="text-white">SuPrazo Technologies</span> — Backend Development</p>
+                        <p><span className="text-white">Aform Solution</span> — Full Stack Web Development</p>
+                        <p><span className="text-white">IDRS</span> — System Designer & Full Stack Development</p>
+                        <p><span className="text-white">Tapza Technologies</span> — AI/ML Development</p>
+                      </div>
+                    </div>
+                    <div className="rounded-sm border border-white/10 bg-white/[0.02] p-4">
+                      <p className="font-mono text-[10px] text-mono-500 tracking-[0.28em] uppercase mb-3">Core Exposure</p>
+                      <div className="flex flex-wrap gap-2">
+                        {['Google Analytics', 'OWASP ZAP', 'Node.js', 'Express.js', 'MongoDB', 'React', 'TailwindCSS', 'OpenAI APIs'].map((item) => (
+                          <span key={item} className="px-3 py-1.5 rounded-sm border border-white/10 bg-white/[0.02] text-[10px] font-mono tracking-[0.2em] uppercase text-mono-300">
+                            {item}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </div>
 

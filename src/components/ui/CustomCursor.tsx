@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useSpring } from 'framer-motion';
 
 const CustomCursor: React.FC = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [cursorVariant, setCursorVariant] = useState('default');
   const [isDesktop, setIsDesktop] = useState(false);
+
+  // Heavy spring configuration for the outer trailing ring
+  const springConfig = { stiffness: 80, damping: 25, mass: 1.5 };
+  const springX = useSpring(0, springConfig);
+  const springY = useSpring(0, springConfig);
 
   useEffect(() => {
     const checkIfDesktop = () => setIsDesktop(window.innerWidth > 1024);
@@ -16,7 +21,11 @@ const CustomCursor: React.FC = () => {
   useEffect(() => {
     if (!isDesktop) return;
 
-    const mouseMove = (e: MouseEvent) => setMousePosition({ x: e.clientX, y: e.clientY });
+    const mouseMove = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+      springX.set(e.clientX);
+      springY.set(e.clientY);
+    };
     const mouseDown = () => setCursorVariant('click');
     const mouseUp = () => setCursorVariant('default');
     const handleHover = () => setCursorVariant('hover');
@@ -41,51 +50,51 @@ const CustomCursor: React.FC = () => {
         el.removeEventListener('mouseleave', handleLeave);
       });
     };
-  }, [isDesktop]);
+  }, [isDesktop, springX, springY]);
 
   if (!isDesktop) return null;
 
   const variants = {
     default: {
-      x: mousePosition.x - 16,
-      y: mousePosition.y - 16,
       height: 32,
       width: 32,
+      x: "-50%",
+      y: "-50%",
       backgroundColor: 'rgba(255, 255, 255, 0)',
       border: '1px solid rgba(255, 255, 255, 0.35)',
     },
     hover: {
-      x: mousePosition.x - 22,
-      y: mousePosition.y - 22,
-      height: 44,
-      width: 44,
+      height: 48,
+      width: 48,
+      x: "-50%",
+      y: "-50%",
       backgroundColor: 'rgba(255, 255, 255, 0.07)',
-      border: '1px solid rgba(255, 255, 255, 0.6)',
+      border: '1px solid rgba(255, 255, 255, 0.8)',
     },
     click: {
-      x: mousePosition.x - 12,
-      y: mousePosition.y - 12,
       height: 24,
       width: 24,
-      backgroundColor: 'rgba(255, 255, 255, 0.15)',
-      border: '1px solid rgba(255, 255, 255, 0.8)',
+      x: "-50%",
+      y: "-50%",
+      backgroundColor: 'rgba(255, 255, 255, 0.2)',
+      border: '1px solid rgba(255, 255, 255, 1)',
     },
   };
 
   return (
     <>
-      {/* Outer ring cursor */}
+      {/* Heavy physics outer ring */}
       <motion.div
-        className="fixed top-0 left-0 rounded-full pointer-events-none z-[9999] mix-blend-difference"
+        className="fixed top-0 left-0 rounded-full pointer-events-none z-[9999] mix-blend-difference flex items-center justify-center"
+        style={{ x: springX, y: springY }}
         variants={variants}
         animate={cursorVariant}
-        transition={{ type: 'spring', stiffness: 600, damping: 32 }}
+        transition={{ type: 'spring', stiffness: 400, damping: 28 }}
       />
-      {/* Dot */}
+      {/* Instant responsive inner dot */}
       <motion.div
-        className="fixed top-0 left-0 w-1 h-1 rounded-full bg-white pointer-events-none z-[9999]"
-        animate={{ x: mousePosition.x - 2, y: mousePosition.y - 2 }}
-        transition={{ type: 'spring', stiffness: 1200, damping: 40 }}
+        className="fixed top-0 left-0 w-1.5 h-1.5 rounded-full bg-white pointer-events-none z-[9999]"
+        style={{ x: mousePosition.x - 3, y: mousePosition.y - 3 }}
       />
     </>
   );

@@ -12,14 +12,46 @@ const About   = lazy(() => import('./components/sections/About'));
 const Projects = lazy(() => import('./components/sections/Projects'));
 const Contact  = lazy(() => import('./components/sections/Contact'));
 
-const LoadingSpinner = () => (
-  <div className="flex items-center justify-center h-screen w-full bg-[#080808]">
-    <div className="flex flex-col items-center gap-4">
-      <div className="w-6 h-6 rounded-sm border border-white/20 animate-pulse" />
-      <span className="text-xs font-mono text-mono-600 tracking-widest uppercase">Loading</span>
+const TerminalLoader = () => {
+  const [lines, setLines] = React.useState<string[]>([]);
+  React.useEffect(() => {
+    const bootSequence = [
+      '[SYS] Initializing core environment...',
+      '[OK] V8 Engine mounted',
+      '[SYS] Establishing secure connection...',
+      '[OK] WebSocket connected',
+      '[SYS] Fetching user topology...',
+      '[OK] Data loaded successfully',
+      '[SYS] Rendering DOM...'
+    ];
+    let i = 0;
+    const interval = setInterval(() => {
+      if (i < bootSequence.length) {
+        setLines(prev => [...prev, bootSequence[i]]);
+        i++;
+      } else {
+        clearInterval(interval);
+      }
+    }, 150);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="flex items-center justify-center h-screen w-full bg-[#080808] p-6">
+      <div className="w-full max-w-md bg-[#050505] border border-white/10 rounded-sm p-6 h-64 overflow-hidden relative shadow-[0_0_30px_rgba(255,255,255,0.02)]">
+        <div className="absolute top-0 left-0 right-0 h-1 bg-white/5" />
+        <div className="flex flex-col gap-2.5">
+          {lines.map((line, idx) => (
+            <span key={idx} className={`font-mono text-[11px] tracking-widest uppercase ${line.startsWith('[OK]') ? 'text-green-400/80' : 'text-mono-500'}`}>
+              {line}
+            </span>
+          ))}
+          <span className="font-mono text-xs text-white animate-pulse">_</span>
+        </div>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 function App() {
   return (
@@ -30,7 +62,7 @@ function App() {
         <Navbar />
 
         <main>
-          <Suspense fallback={<LoadingSpinner />}>
+          <Suspense fallback={<TerminalLoader />}>
             <Hero />
             <About />
             <Experience />
