@@ -1,134 +1,109 @@
-import React, { useEffect, useRef } from 'react';
-import { motion, useAnimation, useInView } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 import { experiences } from '../../data/experience';
-import { Briefcase } from 'lucide-react';
-import DataStream from '../ui/DataStream';
+import { Briefcase, ArrowUpRight, CheckCircle2 } from 'lucide-react';
 
-const Experience: React.FC = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const controls = useAnimation();
-  const isInView = useInView(containerRef, { once: true, amount: 0.1 });
-
-  useEffect(() => {
-    if (isInView) controls.start('visible');
-  }, [controls, isInView]);
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.15 } },
-  };
-
-  const itemVariants = {
-    hidden: { y: 30, opacity: 0 },
-    visible: { y: 0, opacity: 1, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
-  };
-
-  const professionalItems = experiences.filter(exp => exp.type === 'experience');
-
+const ExperienceSection: React.FC = () => {
   return (
-    <section id="experience" className="py-32 bg-[#0d0d0e] relative overflow-hidden">
-      <DataStream />
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+    <section id="experience" className="py-24 bg-[#0e0f13] text-zinc-100 border-b border-zinc-800/80">
+      <div className="max-w-5xl mx-auto px-6">
+        {/* Header */}
+        <div className="mb-14">
+          <div className="inline-flex items-center gap-2 font-mono text-xs text-zinc-400 uppercase tracking-wider mb-2">
+            <span>03 // Work History</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-sans font-bold text-white tracking-tight">
+            Work Experience & Agency
+          </h2>
+          <p className="mt-3 text-sm sm:text-base text-zinc-400 max-w-2xl leading-relaxed">
+            Engineering roles spanning freelance agency leadership at DevFrames, backend platform
+            architecture, and full-stack software development.
+          </p>
+        </div>
 
-      {/* Watermark */}
-      <div className="absolute top-1/2 -translate-y-1/2 -right-[10%] text-[15vw] font-display font-bold text-white/[0.02] leading-none select-none pointer-events-none">
-        HISTORY
-      </div>
+        {/* Timeline Stack */}
+        <div className="space-y-6">
+          {experiences.map((exp, index) => {
+            const isDevFrames = exp.company === 'DevFrames';
 
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
-        <motion.div
-          ref={containerRef}
-          initial="hidden"
-          animate={controls}
-          variants={containerVariants}
-        >
-          {/* Section label */}
-          <motion.div variants={itemVariants} className="flex items-center gap-6 mb-24">
-            <span className="font-mono text-xs text-mono-500 tracking-[0.3em] uppercase">02 // Internship Experience</span>
-            <div className="flex-1 h-px bg-white/[0.05]" />
-          </motion.div>
-
-          {/* Heading + Sub */}
-          <motion.div variants={itemVariants} className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-24">
-            <div className="lg:col-span-6">
-              <h2 className="font-display font-bold text-5xl sm:text-6xl text-white tracking-tighter leading-[1.1]">
-                Internship &<br />
-                <span className="text-gradient">Experience.</span>
-              </h2>
-            </div>
-            <div className="lg:col-span-6 flex items-end">
-              <p className="font-mono text-xs text-mono-500 leading-relaxed max-w-sm tracking-wide">
-                A structured timeline of my internship work across marketing, web development, security, backend systems, full-stack delivery, and AI-assisted workflows.
-              </p>
-            </div>
-          </motion.div>
-
-          {/* ─── INTERNSHIPS ─── */}
-          <motion.div variants={itemVariants}>
-            {/* Column header */}
-            <div className="flex items-center gap-5 mb-12 border-b border-white/[0.05] pb-6">
-              <div className="w-9 h-9 flex items-center justify-center border border-white/10 bg-white/[0.02] rounded-sm text-white">
-                <Briefcase size={18} />
-              </div>
-              <span className="font-display font-semibold text-2xl text-white tracking-tight">Internships</span>
-              <div className="flex-1" />
-              <span className="font-mono text-[10px] text-mono-600 tracking-widest uppercase">{professionalItems.length} {professionalItems.length === 1 ? 'Role' : 'Roles'}</span>
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
-              {professionalItems.map((exp) => (
-                <motion.div
-                  key={exp.id}
-                  variants={itemVariants}
-                  className="lg:col-span-12 group"
-                >
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 py-10 border-b border-white/[0.04] hover:bg-white/[0.01] transition-colors duration-500 relative">
-                    {/* Hover left indicator */}
-                    <div className="absolute left-0 top-0 bottom-0 w-px bg-white scale-y-0 group-hover:scale-y-100 origin-top transition-transform duration-500" />
-
-                    {/* Left: Duration + Role */}
-                    <div className="lg:col-span-4 flex flex-col gap-3 lg:pl-6">
-                      <span className="font-mono text-[10px] text-white bg-white/10 px-3 py-1 rounded-sm tracking-widest w-fit">
-                        {exp.duration}
-                      </span>
-                      <h3 className="font-display font-semibold text-xl text-white tracking-tight">{exp.role}</h3>
-                      <span className="font-mono text-xs text-mono-500 uppercase tracking-widest">{exp.company}</span>
-                      <div className="flex items-center gap-2 mt-1">
-                        <div className={`w-1.5 h-1.5 rounded-full ${exp.status === 'active' ? 'bg-green-400/70 animate-pulse' : 'bg-white/20'}`} />
-                        <span className={`font-mono text-[9px] uppercase tracking-widest ${exp.status === 'active' ? 'text-green-400/70' : 'text-mono-600'}`}>
-                          {exp.status === 'active' ? 'Active' : 'Inactive'}
-                        </span>
-                      </div>
+            return (
+              <motion.div
+                key={exp.id}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.1 }}
+                transition={{ duration: 0.3, delay: index * 0.05 }}
+                className={`p-6 sm:p-8 rounded-lg border transition-all ${
+                  isDevFrames
+                    ? 'border-zinc-700 bg-[#14151b] shadow-lg shadow-black/25'
+                    : 'border-zinc-800/90 bg-[#121317] hover:border-zinc-700'
+                }`}
+              >
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-md border border-zinc-700/80 bg-zinc-900 flex items-center justify-center shrink-0">
+                      <Briefcase size={18} className="text-zinc-300" />
                     </div>
-
-                    {/* Right: Description bullets */}
-                    <div className="lg:col-span-8">
-                      <ul className="flex flex-col gap-5">
-                        {exp.description.map((point, pi) => (
-                          <li key={pi} className="flex items-start gap-5 text-sm text-mono-400 leading-relaxed font-mono group-hover:text-mono-300 transition-colors duration-300">
-                            <div className="flex items-center gap-3 shrink-0 pt-1">
-                              <span className="font-mono text-[9px] text-mono-600 tracking-widest">
-                                {String(pi + 1).padStart(2, '0')}
-                              </span>
-                              <div className="w-4 h-px bg-white/20" />
-                            </div>
-                            {point}
-                          </li>
-                        ))}
-                      </ul>
+                    <div>
+                      <div className="flex flex-wrap items-center gap-2">
+                        <h3 className="font-sans font-bold text-lg text-white">
+                          {exp.company}
+                        </h3>
+                        {exp.badge && (
+                          <span
+                            className={`text-[11px] font-mono px-2.5 py-0.5 rounded border ${
+                              isDevFrames
+                                ? 'bg-zinc-800 text-zinc-200 border-zinc-600 font-semibold'
+                                : 'bg-zinc-900 text-zinc-400 border-zinc-800'
+                            }`}
+                          >
+                            {exp.badge}
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-sm font-mono text-zinc-300 font-medium">{exp.role}</p>
                     </div>
                   </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
 
-        </motion.div>
+                  <div className="flex items-center gap-3 sm:text-right">
+                    <span className="font-mono text-xs text-zinc-400 bg-zinc-900 border border-zinc-800 px-3 py-1 rounded">
+                      {exp.duration}
+                    </span>
+                    {exp.link && (
+                      <a
+                        href={exp.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-xs font-mono text-zinc-400 hover:text-white transition-colors p-1"
+                        title="Agency Website / Repository"
+                      >
+                        <ArrowUpRight size={15} />
+                      </a>
+                    )}
+                  </div>
+                </div>
+
+                {/* Description Bullets */}
+                <div className="mt-5 pt-4 border-t border-zinc-800/70">
+                  <ul className="space-y-2.5">
+                    {exp.description.map((bullet, idx) => (
+                      <li key={idx} className="flex items-start gap-2.5 text-sm text-zinc-300 leading-relaxed font-sans">
+                        <CheckCircle2
+                          size={15}
+                          className="text-zinc-500 mt-1 shrink-0"
+                        />
+                        <span>{bullet}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
-
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
     </section>
   );
 };
 
-export default Experience;
+export default ExperienceSection;

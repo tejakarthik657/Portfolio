@@ -1,13 +1,14 @@
 export interface Project {
   id: number;
   title: string;
+  subtitle?: string;
   description: string;
-  image: string;
+  image?: string;
   techStack: string[];
   liveUrl?: string;
   githubUrl?: string;
   category: string[];
-  highlights: { value: string; label: string }[];
+  highlights?: { value: string; label: string }[];
 }
 
 export interface Experience {
@@ -15,17 +16,32 @@ export interface Experience {
   company: string;
   role: string;
   duration: string;
+  badge?: string;
+  link?: string;
   description: string[];
-  logo: string;
+  logo?: string;
   type: 'education' | 'experience';
   status?: 'active' | 'inactive';
 }
 
+export interface SkillCategory {
+  id: string;
+  title: string;
+  skills: string[];
+}
+
 export interface Skill {
   name: string;
-  percentage: number;
+  category: string;
   icon?: string;
-  category: 'frontend' | 'backend' | 'programming' | 'visualization' | 'design' | 'tools';
+}
+
+export interface Education {
+  degree: string;
+  institution: string;
+  duration: string;
+  score: string;
+  type: string;
 }
 
 export type Theme = 'light' | 'dark';

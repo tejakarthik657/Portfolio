@@ -1,89 +1,59 @@
 import React from 'react';
 import { Github, Linkedin, Mail, ArrowUp } from 'lucide-react';
-import { motion } from 'framer-motion';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
-    { name: 'GitHub',   icon: <Github size={16} />,   url: 'https://github.com/tejakarthik657' },
-    { name: 'LinkedIn', icon: <Linkedin size={16} />, url: 'https://www.linkedin.com/in/karthik-kona-dev/' },
-    { name: 'Email',    icon: <Mail size={16} />,     url: 'mailto:teja.karthik.5505@gmail.com' },
+    { name: 'GitHub',   icon: <Github size={15} />,   url: 'https://github.com/tejakarthik657' },
+    { name: 'LinkedIn', icon: <Linkedin size={15} />, url: 'https://www.linkedin.com/in/karthik-kona-dev/' },
+    { name: 'Email',    icon: <Mail size={15} />,     url: 'mailto:teja.karthik.5505@gmail.com' },
   ];
 
-  const navLinks = ['Home', 'About', 'Experience', 'Projects', 'Contact'];
+  const navLinks = [
+    { name: 'Home', href: '#home' },
+    { name: 'About', href: '#about' },
+    { name: 'Skills', href: '#skills' },
+    { name: 'Experience', href: '#experience' },
+    { name: 'Projects', href: '#projects' },
+    { name: 'Contact', href: '#contact' },
+  ];
 
   return (
-    <footer className="bg-[#0d0d0e] border-t border-white/[0.06] pt-16 pb-8 px-6">
-      <div className="max-w-6xl mx-auto">
-        {/* Top row */}
-        <div className="flex flex-col md:flex-row md:items-start justify-between gap-12 mb-14">
+    <footer className="bg-[#0b0c0f] border-t border-zinc-800/80 pt-16 pb-12 px-6 text-zinc-400">
+      <div className="max-w-5xl mx-auto">
+        <div className="flex flex-col md:flex-row md:items-start justify-between gap-10 mb-12">
           {/* Brand */}
-          <div className="max-w-xs">
-            <div className="flex items-center gap-5 mb-6 group cursor-default">
-              <div className="relative flex items-center justify-center w-9 h-9">
-                {/* The Core Box */}
-                <div className="relative z-10 w-full h-full border border-white/20 group-hover:border-white/50 bg-[#050505] transition-colors duration-500 flex flex-col justify-between p-1 overflow-hidden">
-                  
-                  {/* Internal Scanline */}
-                  <div className="absolute inset-0 bg-white/[0.03] -translate-y-full group-hover:translate-y-full transition-transform duration-[1.5s] ease-in-out" />
-                  
-                  {/* Top Row */}
-                  <div className="flex justify-between items-start w-full relative z-10">
-                    <span className="font-mono text-[8px] font-bold leading-none text-white tracking-widest">N</span>
-                    <div className="flex gap-0.5">
-                      <div className="w-1 h-1 bg-white/20 group-hover:bg-white transition-colors duration-500 delay-100" />
-                      <div className="w-1 h-1 bg-white/20 group-hover:bg-white transition-colors duration-500 delay-200" />
-                    </div>
-                  </div>
-                  
-                  {/* Bottom Row */}
-                  <div className="flex justify-between items-end w-full relative z-10">
-                    <div className="flex flex-col gap-[1px] w-full pr-2 pb-0.5">
-                      <div className="w-full h-px bg-white/20 group-hover:bg-white/50 scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 delay-100" />
-                      <div className="w-2/3 h-px bg-white/20 group-hover:bg-white/50 scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 delay-200" />
-                    </div>
-                    <span className="font-mono text-[8px] font-bold leading-none text-white tracking-widest">M</span>
-                  </div>
-                  
-                  {/* Targeting Reticle Corners */}
-                  <div className="absolute top-0 left-0 w-1.5 h-1.5 border-t border-l border-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="absolute bottom-0 right-0 w-1.5 h-1.5 border-b border-r border-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
-
-                {/* Surrounding Frame */}
-                <div className="absolute inset-[-4px] border border-white/5 opacity-0 group-hover:opacity-100 scale-95 group-hover:scale-100 transition-all duration-500 pointer-events-none" />
+          <div className="max-w-sm">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-7 h-7 rounded border border-zinc-700 bg-zinc-900 flex items-center justify-center text-xs font-mono font-bold text-white">
+                TK
               </div>
-
-              <div className="flex flex-col justify-center gap-1">
-                  <span className="font-display font-bold text-white text-xs tracking-[0.2em] uppercase transition-all duration-500 group-hover:tracking-[0.25em]">
-                    Teja Karthik
-                </span>
-                <div className="flex items-center gap-2">
-                  <div className="h-px bg-white/20 w-4 group-hover:w-8 transition-all duration-500" />
-                  <span className="font-mono text-[8px] text-mono-500 tracking-[0.3em] uppercase leading-none group-hover:text-white transition-colors duration-500">
-                      Full_Stack_Node // 01
-                  </span>
-                </div>
-              </div>
+              <span className="font-sans font-bold text-white text-base tracking-tight">
+                K. Teja Karthik
+              </span>
             </div>
-            <p className="text-xs text-mono-600 leading-relaxed font-mono">
-                Full-Stack Developer focused on backend engineering, secure web systems, and AI-assisted workflows.<br />
-                Building clean, modern digital experiences with purpose.
+            <p className="text-xs text-zinc-400 leading-relaxed font-sans mb-2">
+              Backend & AI Software Engineer · Founder at DevFrames Freelance Agency.
+            </p>
+            <p className="text-xs text-zinc-500 font-mono">
+              Warangal, Telangana, India
             </p>
           </div>
 
           {/* Quick links */}
           <div>
-            <h3 className="text-xs font-mono text-mono-600 tracking-widest uppercase mb-5">Navigation</h3>
-            <ul className="space-y-3">
+            <h3 className="text-xs font-mono text-zinc-400 uppercase tracking-wider mb-3">
+              Navigation
+            </h3>
+            <ul className="flex flex-wrap gap-x-6 gap-y-2 text-xs font-mono">
               {navLinks.map((link) => (
-                <li key={link}>
+                <li key={link.name}>
                   <a
-                    href={`#${link.toLowerCase()}`}
-                    className="text-sm text-mono-500 hover:text-white transition-colors duration-300 font-medium"
+                    href={link.href}
+                    className="text-zinc-400 hover:text-white transition-colors"
                   >
-                    {link}
+                    {link.name}
                   </a>
                 </li>
               ))}
@@ -92,44 +62,38 @@ const Footer: React.FC = () => {
 
           {/* Social + Back to top */}
           <div>
-            <h3 className="text-xs font-mono text-mono-600 tracking-widest uppercase mb-5">Connect</h3>
-            <div className="flex gap-3 mb-8">
+            <h3 className="text-xs font-mono text-zinc-400 uppercase tracking-wider mb-3">
+              Connect
+            </h3>
+            <div className="flex items-center gap-2 mb-4">
               {socialLinks.map((link) => (
-                <motion.a
+                <a
                   key={link.name}
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={link.name}
-                  className="p-2.5 border border-white/10 text-mono-500 rounded-sm hover:border-white/30 hover:text-white transition-all duration-300"
-                  whileHover={{ scale: 1.08, y: -2 }}
-                  whileTap={{ scale: 0.93 }}
+                  className="p-2 border border-zinc-800 rounded-md text-zinc-400 hover:text-white hover:border-zinc-700 hover:bg-zinc-900 transition-colors"
                 >
                   {link.icon}
-                </motion.a>
+                </a>
               ))}
             </div>
 
-            {/* Back to top */}
-            <motion.a
+            <a
               href="#home"
-              className="inline-flex items-center gap-2 text-xs font-mono text-mono-600 hover:text-white tracking-widest uppercase transition-colors duration-300"
-              whileHover={{ y: -2 }}
+              className="inline-flex items-center gap-1.5 text-xs font-mono text-zinc-500 hover:text-white transition-colors"
             >
-              <ArrowUp size={13} />
-              Back to Top
-            </motion.a>
+              <ArrowUp size={12} />
+              <span>Back to Top</span>
+            </a>
           </div>
         </div>
 
         {/* Bottom divider + copyright */}
-        <div className="border-t border-white/[0.06] pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-mono-700 font-mono">
-            © {currentYear} Teja Karthik. All rights reserved.
-          </p>
-          <p className="text-xs text-mono-700 font-mono">
-            Built with React · TypeScript · Framer Motion
-          </p>
+        <div className="border-t border-zinc-800/60 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-zinc-500">
+          <p>© {currentYear} K. Teja Karthik. All rights reserved.</p>
+          <p>DevFrames Agency · Portfolio</p>
         </div>
       </div>
     </footer>
